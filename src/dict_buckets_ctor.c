@@ -15,7 +15,7 @@ int dict_buckets_ctor(bucket_t **buckets, uint64_t size)
     for (; index < size; ++index) {
         buckets[index] = (bucket_t *) calloc(1, sizeof(bucket_t));
         if (NULL == buckets[index]) {
-            dict_buckets_dtor(buckets, index, 0, NULL);
+            dict_buckets_dtor(buckets, index, NULL);
             return -1;
         }
     }

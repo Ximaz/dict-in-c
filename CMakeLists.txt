@@ -69,8 +69,6 @@ target_sources(
   "src/murmurhash1.c"
   "src/dict_ctor.c"
   "src/dict_dtor.c"
-  "src/entry_ctor.c"
-  "src/entry_dtor.c"
   "src/dict_buckets_ctor.c"
   "src/dict_buckets_dtor.c"
   "src/dict_buckets_debug.c"

@@ -68,50 +68,97 @@
 #define DICT_BUCKET_IDX(H, S) (H) % (S)
 
 /**
- * @internal
- * @brief This structure represents a key / value pair.
+ * @brief Such function prototype represents the function to use to release the
+ * memory allcoated to an entry value. If the value was not allocated (e.g. the
+ * value is an integer), then you may use a NULL pointer instead to indicate
+ * that the value has not to be free.
  */
-typedef struct s_entry {
+typedef void (*free_pair_t)(char *key, void *value);
+
+/**
+ * @brief The bucket type is a linked list node which contains both the key and
+ * the value to store.
+ */
+typedef struct s_bucket {
     /** The key used to refer to the value. */
-    const char *key;
+    char *key;
 
     /** The value to store, refered at via the key. */
     void *value;
-} entry_t;
-
-/**
- * @internal
- * @file src/entry_ctor.c
- * @brief Allocates a new entry. If it failed, returns `NULL`.
- *
- * @param key The key used to refer to the value.
- * @param value The value to store, refered at via the key.
- * @return The allocated entry.
- */
-entry_t *entry_ctor(const char *key, void *value);
-
-/**
- * @internal
- * @file src/entry_dtor.c
- * @brief Deallocates the entry.
- *
- * The deallocator will only free the entry itself. It will not free neither
- * the key nor the value. The programmer is in charge of entry's members
- * deallocation.
- *
- * If the entry has already been deallocated, the function will crash.
- *
- * @param entry The entry's pointer to deallocate.
- */
-void entry_dtor(entry_t *entry);
-
-typedef struct s_bucket {
-    /** Entry to store. */
-    entry_t *entry;
 
     /** Pointer to the next entry. */
     struct s_bucket *next;
 } bucket_t;
+
+/**
+ * @internal
+ * @file src/dict_buckets_ctor.c
+ * @brief Allocates new buckets linked list inside the array.
+ *
+ * If it failed to allocate one bucket, it free all the previously allocated
+ * ones before returning -1.
+ *
+ * If existing buckets are already allocated inside the array, they will not
+ * be free by this function. The programmer will have to free them first, even
+ * though the purpose of this function is to allocate buckets of a new buckets
+ * array that has just been allocated.
+ *
+ * If the buckets array is a `NULL` pointer, the function will crash.
+ *
+ * @param buckets The pre-allocated buckets array.
+ * @param size The number of buckets to allocate inside the buckets array.
+ * @return 0 on success, -1 on error.
+ */
+int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
+
+/**
+ * @internal
+ * @file src/dict_buckets_dtor.c
+ * @brief Deallocates buckets linked list from the array.
+ *
+ * This function will not free the buckets array, just it's elements.
+ *
+ * If the buckets array is a `NULL` pointer, the function will crash.
+ *
+ * @param buckets The pre-allocated buckets array.
+ * @param size The nuber of buckets to deallocate from the buckets array.
+ * @param free_pair The function to use to free pair, may be `NULL`.
+ */
+void dict_buckets_dtor(bucket_t **buckets, uint64_t size,
+    free_pair_t free_pair);
+
+/**
+ * @internal
+ * @file src/dict_bucket_insert.c
+ * @brief Inserts an entry into a dict bucket.
+ *
+ * If it failed to allocate the linked list bucket node, the bucket is left
+ * unchanged and the function returns -1.
+ *
+ * If a `NULL` pointer is passed for bucket, the function will crash.
+ *
+ * @param bucket The pointer to the allocated bucket.
+ * @param key The key of the pair.
+ * @param value The value of the pair.
+ * @return 0 on success, -1 on error.
+ */
+int dict_bucket_insert(bucket_t **bucket, char *key, void *value);
+
+/**
+ * @internal
+ * @file src/dict_buckets_debug.c
+ * @brief This function prints the content of each linked list bucket from the
+ * buckets array.
+ *
+ * The debugging content will be flushed to the STDERR file descriptor (2).
+ *
+ * If `NULL` pointer is passed, or if the size is greater than the actual size
+ * of the array, this function will crash.
+ *
+ * @param buckets The buckets to debug.
+ * @param size The number of bucket inside the buckets array.
+ */
+void dict_buckets_debug(bucket_t *const *buckets, uint64_t size);
 
 /**
  * @brief This structure represents the state of a dict (hashmap) object. Upon
@@ -179,56 +226,6 @@ typedef struct s_dict_values {
 dict_t *dict_ctor(void);
 
 /**
- * @internal
- * @file src/dict_buckets_ctor.c
- * @brief Allocates new buckets linked list inside the array.
- *
- * If it failed to allocate one bucket, it free all the previously allocated
- * ones before returning -1.
- *
- * If existing buckets are already allocated inside the array, they will not
- * be free by this function. The programmer will have to free them first, even
- * though the purpose of this function is to allocate buckets of a new buckets
- * array that has just been allocated.
- *
- * If the buckets array is a `NULL` pointer, the function will crash.
- *
- * @param buckets The pre-allocated buckets array.
- * @param size The number of buckets to allocate inside the buckets array.
- * @return 0 on success, -1 on error.
- */
-int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
-
-/**
- * @brief Such function prototype represents the function to use to release the
- * memory allcoated to an entry value. If the value was not allocated (e.g. the
- * value is an integer), then you may use a NULL pointer instead to indicate
- * that the value has not to be free.
- */
-typedef void (*free_value_t)(void *value);
-
-/**
- * @internal
- * @file src/dict_buckets_dtor.c
- * @brief Deallocates buckets linked list from the array.
- *
- * This function will not free the buckets array, just it's elements.
- *
- * If the buckets array is a `NULL` pointer, the function will crash.
- *
- * If `free_entries` equals 0 but the `free_value` is not `NULL`, the function
- * will not free entries, thus `free_value` will not be called. If you want to
- * free the entries value, make sure to set `free_entries` to 1.
- *
- * @param buckets The pre-allocated buckets array.
- * @param size The nuber of buckets to deallocate from the buckets array.
- * @param free_entries Whether to free the entries inside each bucket. (1 | 0).
- * @param free_value The function to use to free entries value, may be `NULL`.
- */
-void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries,
-    free_value_t free_value);
-
-/**
  * @file src/dict_dtor.c
  * @brief Deallocates the dict.
  *
@@ -239,25 +236,9 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries,
  * the function will crash.
  *
  * @param dict The dict's pointer to deallocate.
- * @param free_value The function to use to free entries value, may be `NULL`.
+ * @param free_pair The function to use to free pair, may be `NULL`.
  */
-void dict_dtor(dict_t *dict, free_value_t free_value);
-
-/**
- * @internal
- * @file src/dict_bucket_insert.c
- * @brief Inserts an entry into a dict bucket.
- *
- * If it failed to allocate the linked list bucket node, the bucket is left
- * unchanged and the function returns -1.
- *
- * If a `NULL` pointer is passed for bucket, the function will crash.
- *
- * @param bucket The pointer to the allocated bucket.
- * @param entry The entry to insert.
- * @return 0 on success, -1 on error.
- */
-int dict_bucket_insert(bucket_t **bucket, entry_t *entry);
+void dict_dtor(dict_t *dict, free_pair_t free_pair);
 
 /**
  * @file src/dict_insert.c
@@ -276,8 +257,7 @@ int dict_bucket_insert(bucket_t **bucket, entry_t *entry);
  * @param value The value refered at via the key.
  * @return 0 on success, -1 on error.
  */
-int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
-    void *value);
+int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
 
 /**
  * @internal
@@ -309,21 +289,5 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
  * @return 0 on success, -1 on error.
  */
 int dict_resize(dict_t *dict);
-
-/**
- * @internal
- * @file src/dict_buckets_debug.c
- * @brief This function prints the content of each linked list bucket from the
- * buckets array.
- *
- * The debugging content will be flushed to the STDERR file descriptor (2).
- *
- * If `NULL` pointer is passed, or if the size is greater than the actual size
- * of the array, this function will crash.
- *
- * @param buckets The buckets to debug.
- * @param size The number of bucket inside the buckets array.
- */
-void dict_buckets_debug(bucket_t *const *buckets, uint64_t size);
 
 #endif /* !__DICT_H_ */

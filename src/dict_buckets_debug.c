@@ -18,8 +18,8 @@ void dict_buckets_debug(bucket_t *const *buckets, uint64_t size)
         bucket = buckets[index];
         node_index = 0;
         dprintf(2, "Buckets[%llu] : %p\n", index, (void *) bucket);
-        while (NULL != bucket && NULL != bucket->entry) {
-            dprintf(2, "- [%llu] = %s\n", node_index, bucket->entry->key);
+        while (NULL != bucket) {
+            dprintf(2, "- [%llu] = %s\n", node_index, bucket->key);
             bucket = bucket->next;
         }
     }

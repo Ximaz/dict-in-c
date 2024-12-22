@@ -8,13 +8,14 @@
 #include <stdlib.h>
 #include "dict.h"
 
-int dict_bucket_insert(bucket_t **bucket, entry_t *entry)
+int dict_bucket_insert(bucket_t **bucket, char *key, void *value)
 {
     bucket_t *node = (bucket_t *) calloc(1, sizeof(bucket_t));
 
     if (NULL == node)
         return -1;
-    node->entry = entry;
+    node->key = key;
+    node->value = value;
     node->next = *bucket;
     *bucket = node;
     return 0;

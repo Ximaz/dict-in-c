@@ -12,7 +12,7 @@ function run_tests {
 
 function main {
     local path=$(pwd)
-    run_tests 1>/dev/null
+    run_tests
     cd "${path}"
     gcovr --exclude tests --txt
 }

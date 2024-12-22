@@ -56,7 +56,7 @@ void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
     const entry_t *entry = NULL;
     bucket_t *new_bucket = NULL;
 
-    while (NULL != bucket) {
+    while (NULL != bucket && NULL != bucket->entry) {
         entry = bucket->entry;
         key_hash = murmurhash1(entry->key, strlen(entry->key), HASH_SEED);
         new_bucket = new_buckets[DICT_BUCKET_IDX(key_hash, new_size)];
@@ -65,10 +65,25 @@ void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
     }
 }
 
+/**
+ * @link https://github.com/python/cpython/blob/main/Python/hashtable.c#L108
+ */
+static
+uint64_t round_size(uint64_t new_size)
+{
+    uint64_t i = 1;
+
+    if (new_size < DICT_MIN_SIZE)
+        return DICT_MIN_SIZE;
+    while (i < new_size)
+        i <<= 1;
+    return i;
+}
+
 int dict_resize(dict_t *dict)
 {
     uint64_t index = 0;
-    uint64_t new_size = dict->size * DICT_RESIZE_FACTOR;
+    uint64_t new_size = round_size(dict->size * DICT_RESIZE_FACTOR);
     bucket_t **new_buckets = compute_new_buckets(new_size);
 
     if (NULL == new_buckets)

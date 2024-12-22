@@ -73,6 +73,7 @@ target_sources(
   "src/entry_dtor.c"
   "src/dict_buckets_ctor.c"
   "src/dict_buckets_dtor.c"
+  "src/dict_buckets_debug.c"
   "src/dict_bucket_insert.c"
   "src/dict_insert.c"
   "src/dict_resize.c"

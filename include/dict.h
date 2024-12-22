@@ -13,7 +13,7 @@
 /**
  * @brief The default number of buckets to be allocated.
  */
-#define DICT_MIN_SIZE 16
+#define DICT_MIN_SIZE (2 << 3)
 
 /**
  * @brief The factor limit to be reach before allocating new buckets.
@@ -35,7 +35,7 @@
  *
  * @param D The dict to evaluate.
  */
-#define DICT_MUST_GROW(D) (float) (D)->items / (float) ((D)->size) > DICT_HIGH
+#define DICT_MUST_GROW(D) ((float) (D)->items / (float) (D)->size) > DICT_HIGH
 
 /**
  * @brief Returns whether the dict must shirnk to save some memory upon entry
@@ -43,7 +43,7 @@
  *
  * @param D The dict to evaluate.
  */
-#define DICT_MUST_SHRINK(D) (float) (D)->items / (float) ((D)->size) < DICT_LOW
+#define DICT_MUST_SHRINK(D) ((float) (D)->items / (float) (D)->size) < DICT_LOW
 
 /**
  * @brief The hash seed to use. Mostly for security, but it has to be the same
@@ -57,7 +57,7 @@
  * @param H The key hash.
  * @param S The size of the buckets array.
  */
-#define DICT_BUCKET_IDX(H, S) (H) & (S)
+#define DICT_BUCKET_IDX(H, S) (H) % (S)
 
 typedef struct s_entry {
     /** The key used to refer to the value. */
@@ -222,5 +222,19 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
  * @return 0 on success, -1 on error.
  */
 int dict_resize(dict_t *dict);
+
+/**
+ * @brief This function prints the content of each linked list bucket from the
+ * buckets array.
+ *
+ * The debugging content will be flushed to the STDERR file descriptor (2).
+ *
+ * If `NULL` pointer is passed, or if the size is greater than the actual size
+ * of the array, this function will crash.
+ *
+ * @param buckets The buckets to debug.
+ * @param size The number of bucket inside the buckets array.
+ */
+void dict_buckets_debug(bucket_t *const *buckets, uint64_t size);
 
 #endif /* !__DICT_H_ */

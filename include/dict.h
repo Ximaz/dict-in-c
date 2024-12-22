@@ -11,13 +11,6 @@
 #include <stdint.h>
 
 /**
- * By default, a dict object will have DICT_MIN_SIZE buckets available. If the
- * sum of bucket entries divided by the number of available buckets is greater
- * than DICT_HIGH, it means that we should consider upgrading the dict's size,
- * and rehash all it's entries, so we avoid greater linked list sizes.
- */
-
-/**
  * @brief The default number of buckets to be allocated.
  */
 #define DICT_MIN_SIZE 16
@@ -209,16 +202,16 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
  * slow. We will used `strlen` instead of storing the length of the key as an
  * entry member for the following reasons :
  *
- * - upon creation, there is a chance that the programmer already knows the
+ * 1. upon creation, there is a chance that the programmer already knows the
  *   length of the key, so that we don't have to use the `strlen` function. If
- *   they don't know the length of the key, they are responsible for using a
- *   function such as `strlen`,
+ *   they don't know the length of the key, they are responsible for using such
+ *   function;
  *
- * - the resize opeartion is complitly abstract to the programmer,
+ * 2. the resize opeartion is complitly abstract to the programmer;
  *
- * - dict object are pretty heavy in memory, it could be nice to save 8 bytes
+ * 3. dict object are pretty heavy in memory, it could be nice to save 8 bytes
  *   per key, knowning CPU can compute pretty fast, and that the `strlen`
- *   function is probably optimized.
+ *   function is probably optimized;
  *
  * If the dict could not be resized, it's unchanged and -1 is returned.
  *

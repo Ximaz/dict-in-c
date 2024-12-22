@@ -98,7 +98,7 @@ typedef struct s_bucket {
 } bucket_t;
 
 /**
- * @brief This structur erepresents the state of a dict (hashmap) object. Upon
+ * @brief This structure represents the state of a dict (hashmap) object. Upon
  * insertion, the string keys are hashed using Murmurhash1 algorithm. They are
  * then stored inside a linked list (bucket), inside an array (buckets).
  *

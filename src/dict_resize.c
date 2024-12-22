@@ -47,7 +47,7 @@ static bucket_t **compute_new_buckets(uint64_t new_size)
  * @param new_buckets The linked list buckets array receiving the entries.
  * @param new_size The linked list buckets array size.
  */
-static void dict_rehash_bucket(bucket_t *bucket, bucket_t **new_buckets,
+static void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
     uint64_t new_size)
 {
     uint32_t key_hash = 0;

@@ -11,26 +11,31 @@
 #include <stdint.h>
 
 /**
+ * @internal
  * @brief The default number of buckets to be allocated.
  */
 #define DICT_MIN_SIZE (2 << 3)
 
 /**
+ * @internal
  * @brief The factor limit to be reach before allocating new buckets.
  */
 #define DICT_HIGH 0.5
 
 /**
+ * @internal
  * @brief The factor limit to be reach before deallocating buckets.
  */
 #define DICT_LOW 0.1
 
 /**
+ * @internal
  * @brief Once multiplied by the number of entries, returns the new dict size.
  */
 #define DICT_RESIZE_FACTOR 2.0 / (DICT_HIGH + DICT_LOW)
 
 /**
+ * @internal
  * @brief Returns whether the dict must grow to accept new entries.
  *
  * @param D The dict to evaluate.
@@ -38,6 +43,7 @@
 #define DICT_MUST_GROW(D) ((float) (D)->items / (float) (D)->size) > DICT_HIGH
 
 /**
+ * @internal
  * @brief Returns whether the dict must shirnk to save some memory upon entry
  * removal.
  *
@@ -46,12 +52,14 @@
 #define DICT_MUST_SHRINK(D) ((float) (D)->items / (float) (D)->size) < DICT_LOW
 
 /**
+ * @internal
  * @brief The hash seed to use. Mostly for security, but it has to be the same
  * all across the project.
  */
 #define HASH_SEED 0
 
 /**
+ * @internal
  * @brief Returns the index to the bucket in which to store the entry.
  *
  * @param H The key hash.
@@ -59,6 +67,10 @@
  */
 #define DICT_BUCKET_IDX(H, S) (H) % (S)
 
+/**
+ * @internal
+ * @brief This structure represents a key / value pair.
+ */
 typedef struct s_entry {
     /** The key used to refer to the value. */
     const char *key;
@@ -68,6 +80,8 @@ typedef struct s_entry {
 } entry_t;
 
 /**
+ * @internal
+ * @file src/entry_ctor.c
  * @brief Allocates a new entry. If it failed, returns `NULL`.
  *
  * @param key The key used to refer to the value.
@@ -77,6 +91,8 @@ typedef struct s_entry {
 entry_t *entry_ctor(const char *key, void *value);
 
 /**
+ * @internal
+ * @file src/entry_dtor.c
  * @brief Deallocates the entry.
  *
  * The deallocator will only free the entry itself. It will not free neither
@@ -153,6 +169,7 @@ typedef struct s_dict_values {
 } dict_values_t;
 
 /**
+ * @file src/dict_ctor.c
  * @brief Allocates a new dict.
  *
  * If it failed, returns `NULL`.
@@ -162,6 +179,8 @@ typedef struct s_dict_values {
 dict_t *dict_ctor(void);
 
 /**
+ * @internal
+ * @file src/dict_buckets_ctor.c
  * @brief Allocates new buckets linked list inside the array.
  *
  * If it failed to allocate one bucket, it free all the previously allocated
@@ -189,6 +208,8 @@ int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
 typedef void (*free_value_t)(void *value);
 
 /**
+ * @internal
+ * @file src/dict_buckets_dtor.c
  * @brief Deallocates buckets linked list from the array.
  *
  * This function will not free the buckets array, just it's elements.
@@ -208,6 +229,7 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries,
     free_value_t free_value);
 
 /**
+ * @file src/dict_dtor.c
  * @brief Deallocates the dict.
  *
  * The deallocator will only free the buckets array and the dict. It will not
@@ -222,6 +244,8 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries,
 void dict_dtor(dict_t *dict, free_value_t free_value);
 
 /**
+ * @internal
+ * @file src/dict_bucket_insert.c
  * @brief Inserts an entry into a dict bucket.
  *
  * If it failed to allocate the linked list bucket node, the bucket is left
@@ -236,6 +260,7 @@ void dict_dtor(dict_t *dict, free_value_t free_value);
 int dict_bucket_insert(bucket_t **bucket, entry_t *entry);
 
 /**
+ * @file src/dict_insert.c
  * @brief Insert an entry into the dict.
  *
  * The function allocates a new entry. If it was able to allocate AND insert
@@ -255,6 +280,8 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
     void *value);
 
 /**
+ * @internal
+ * @file src/dict_resize.c
  * @brief Resizes the dict.
  *
  * This process implies that all the key hashes must be recomputed. Depending
@@ -284,6 +311,8 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
 int dict_resize(dict_t *dict);
 
 /**
+ * @internal
+ * @file src/dict_buckets_debug.c
  * @brief This function prints the content of each linked list bucket from the
  * buckets array.
  *

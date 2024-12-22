@@ -17,9 +17,9 @@ void dict_buckets_debug(bucket_t *const *buckets, uint64_t size)
     for (; index < size; ++index) {
         bucket = buckets[index];
         node_index = 0;
-        fprintf(stderr, "Buckets[%llu] : %p\n", index, (void *) bucket);
+        fprintf(stderr, "Buckets[%lu] : %p\n", index, (void *) bucket);
         while (NULL != bucket) {
-            fprintf(stderr, "- [%llu] = %s\n", node_index, bucket->key);
+            fprintf(stderr, "- [%lu] = %s\n", node_index, bucket->key);
             bucket = bucket->next;
         }
     }

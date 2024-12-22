@@ -45,5 +45,8 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
         return -1;
     key_hash = hash(key, key_length, HASH_SEED);
     bucket = DICT_GRAB_BUCKET(dict, key_hash);
-    return insert_bucket_tail(&bucket, entry);
+    if (-1 == insert_bucket_tail(&bucket, entry))
+        return -1;
+    ++dict->items;
+    return 0;
 }

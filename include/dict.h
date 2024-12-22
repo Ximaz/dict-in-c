@@ -91,7 +91,7 @@ void entry_dtor(entry_t *entry);
 
 typedef struct s_bucket {
     /** Entry to store. */
-    const entry_t *entry;
+    entry_t *entry;
 
     /** Pointer to the next entry. */
     struct s_bucket *next;
@@ -181,16 +181,31 @@ dict_t *dict_ctor(void);
 int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
 
 /**
+ * @brief Such function prototype represents the function to use to release the
+ * memory allcoated to an entry value. If the value was not allocated (e.g. the
+ * value is an integer), then you may use a NULL pointer instead to indicate
+ * that the value has not to be free.
+ */
+typedef void (*free_value_t)(void *value);
+
+/**
  * @brief Deallocates buckets linked list from the array.
  *
  * This function will not free the buckets array, just it's elements.
  *
  * If the buckets array is a `NULL` pointer, the function will crash.
  *
+ * If `free_entries` equals 0 but the `free_value` is not `NULL`, the function
+ * will not free entries, thus `free_value` will not be called. If you want to
+ * free the entries value, make sure to set `free_entries` to 1.
+ *
  * @param buckets The pre-allocated buckets array.
  * @param size The nuber of buckets to deallocate from the buckets array.
+ * @param free_entries Whether to free the entries inside each bucket. (1 | 0).
+ * @param free_value The function to use to free entries value, may be `NULL`.
  */
-void dict_buckets_dtor(bucket_t **buckets, uint64_t size);
+void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries,
+    free_value_t free_value);
 
 /**
  * @brief Deallocates the dict.
@@ -202,8 +217,9 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size);
  * the function will crash.
  *
  * @param dict The dict's pointer to deallocate.
+ * @param free_value The function to use to free entries value, may be `NULL`.
  */
-void dict_dtor(dict_t *dict);
+void dict_dtor(dict_t *dict, free_value_t free_value);
 
 /**
  * @brief Inserts an entry into a dict bucket.
@@ -217,7 +233,7 @@ void dict_dtor(dict_t *dict);
  * @param entry The entry to insert.
  * @return 0 on success, -1 on error.
  */
-int dict_bucket_insert(bucket_t **bucket, const entry_t *entry);
+int dict_bucket_insert(bucket_t **bucket, entry_t *entry);
 
 /**
  * @brief Insert an entry into the dict.

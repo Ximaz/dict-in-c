@@ -25,5 +25,5 @@ Test(dict_insert, passing)
     cr_expect(eq(int, 0, dict_insert(dict, "KEY7", 4, (void *) my_value)));
     cr_expect(eq(int, 0, dict_insert(dict, "KEY8", 4, (void *) my_value)));
     cr_expect(eq(int, 0, dict_insert(dict, "KEY9", 4, (void *) my_value)));
-    dict_dtor(dict);
+    dict_dtor(dict, NULL);
 }

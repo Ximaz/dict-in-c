@@ -53,7 +53,7 @@ void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
     uint64_t new_size)
 {
     uint32_t key_hash = 0;
-    const entry_t *entry = NULL;
+    entry_t *entry = NULL;
     bucket_t *new_bucket = NULL;
 
     while (NULL != bucket && NULL != bucket->entry) {
@@ -90,7 +90,7 @@ int dict_resize(dict_t *dict)
         return -1;
     for (; index < dict->size; ++index)
         dict_rehash_bucket(dict->buckets[index], new_buckets, new_size);
-    dict_buckets_dtor(dict->buckets, dict->size);
+    dict_buckets_dtor(dict->buckets, dict->size, 0, NULL);
     free(dict->buckets);
     dict->buckets = new_buckets;
     dict->size = new_size;

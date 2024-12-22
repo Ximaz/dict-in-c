@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "dict.h"
 
-int dict_bucket_insert(bucket_t **bucket, const entry_t *entry)
+int dict_bucket_insert(bucket_t **bucket, entry_t *entry)
 {
     bucket_t *node = (bucket_t *) calloc(1, sizeof(bucket_t));
 

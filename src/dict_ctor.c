@@ -8,15 +8,15 @@
 #include <stdlib.h>
 #include "dict.h"
 
-/* TODO: The way linked list buckets are created is wrong. */
 dict_t *dict_ctor(void)
 {
     dict_t *dict = (dict_t *) calloc(1, sizeof(dict_t));
 
     if (NULL == dict)
         return NULL;
-    dict->buckets = (bucket_t *) calloc(DICT_MIN_SIZE, sizeof(bucket_t));
-    if (NULL == dict->buckets) {
+    dict->buckets = (bucket_t **) calloc(DICT_MIN_SIZE, sizeof(bucket_t *));
+    if (NULL == dict->buckets || \
+        -1 == dict_buckets_ctor(dict->buckets, DICT_MIN_SIZE)) {
         free(dict);
         return NULL;
     }

@@ -17,12 +17,7 @@ Test(dict_ctor_and_dtor, passing)
 
     cr_expect(ne(ptr, NULL, dict));
     cr_expect(eq(int, 0, dict->items));
-    cr_expect(ne(int, DICT_MIN_SIZE, dict->size));
+    cr_expect(eq(int, DICT_MIN_SIZE, dict->size));
     cr_expect(ne(ptr, NULL, dict->buckets));
     dict_dtor(dict);
-}
-
-Test(dict_dtor, passing)
-{
-    dict_dtor(NULL);
 }

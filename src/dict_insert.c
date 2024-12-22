@@ -9,28 +9,6 @@
 #include "dict.h"
 #include "murmurhash1.h"
 
-/**
- * TODO: The way buckets are implemented right now is not good.
- * This won't work yet.
- */
-static int insert_bucket_tail(bucket_t **bucket, entry_t *entry)
-{
-    bucket_t *next = (bucket_t *) calloc(1, sizeof(bucket_t));
-
-    if (NULL == next)
-        return -1;
-    if (NULL == (*bucket)->entry) {
-        (*bucket)->entry = entry;
-        (*bucket)->next = next;
-        return 0;
-    }
-    while (NULL != (*bucket)->next)
-        (*bucket) = (*bucket)->next;
-    (*bucket)->entry = entry;
-    (*bucket)->next = next;
-    return 0;
-}
-
 int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
     void *value)
 {
@@ -44,8 +22,8 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
     if (NULL == entry)
         return -1;
     key_hash = hash(key, key_length, HASH_SEED);
-    bucket = DICT_GRAB_BUCKET(dict, key_hash);
-    if (-1 == insert_bucket_tail(&bucket, entry))
+    bucket = dict->buckets[DICT_BUCKET_IDX(key_hash, dict->size)];
+    if (-1 == dict_bucket_insert(&bucket, entry))
         return -1;
     ++dict->items;
     return 0;

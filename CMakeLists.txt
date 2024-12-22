@@ -66,9 +66,16 @@ target_include_directories(
 )
 target_sources(
   dict PRIVATE
+  "src/murmurhash1.c"
   "src/dict_ctor.c"
   "src/dict_dtor.c"
-  "src/murmurhash1.c"
+  "src/entry_ctor.c"
+  "src/entry_dtor.c"
+  "src/dict_buckets_ctor.c"
+  "src/dict_buckets_dtor.c"
+  "src/dict_bucket_insert.c"
+  "src/dict_insert.c"
+  "src/dict_resize.c"
 )
 target_compile_options(dict PRIVATE ${MY_CFLAGS})
 

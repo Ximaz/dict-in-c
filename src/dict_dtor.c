@@ -10,6 +10,7 @@
 
 void dict_dtor(dict_t *dict)
 {
+    dict_buckets_dtor(dict->buckets, dict->size);
     free(dict->buckets);
     free(dict);
 }

@@ -6,17 +6,76 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "dict.h"
+#include "murmurhash1.h"
+
+/**
+ * @brief This function is reponsible for allocating a new linked list buckets
+ * array.
+ *
+ * If it fails, it deallocates all the successfully allocated linked list along
+ * with the buckets array itself, and it returns a `NULL` pointer.
+ *
+ * @param new_size The number of buckets to allocate.
+ * @return The allocated buckets array on success, `NULL` pointer on error.
+ */
+static bucket_t **compute_new_buckets(uint64_t new_size)
+{
+    bucket_t **new_buckets = calloc(new_size, sizeof(bucket_t *));
+
+    if (NULL == new_buckets)
+        return NULL;
+    if (-1 == dict_buckets_ctor(new_buckets, new_size)) {
+        free(new_buckets);
+        return NULL;
+    }
+    return new_buckets;
+}
+
+/**
+ * @brief This function iterates over a non-empty bucket linked list.
+ * It looks for all it's entries, re-hash the keys and tries to place the entry
+ * to a new bucket.
+ *
+ * If the new bucket was not allocated, the function will crash. The buckets
+ * array must have been allocated using the dict_buckets_ctor function, which
+ * itself allocates all the subsequent linked list, so that the new_bucket is
+ * never a `NULL` pointer.
+ *
+ * @param bucket The bucket from which to scan for entries.
+ * @param new_buckets The linked list buckets array receiving the entries.
+ * @param new_size The linked list buckets array size.
+ */
+static void dict_rehash_bucket(bucket_t *bucket, bucket_t **new_buckets,
+    uint64_t new_size)
+{
+    uint32_t key_hash = 0;
+    const entry_t *entry = NULL;
+    bucket_t *new_bucket = NULL;
+
+    while (NULL != bucket) {
+        entry = bucket->entry;
+        key_hash = hash(entry->key, strlen(entry->key), HASH_SEED);
+        new_bucket = new_buckets[DICT_BUCKET_IDX(key_hash, new_size)];
+        dict_bucket_insert(&new_bucket, entry);
+        bucket = bucket->next;
+    }
+}
 
 int dict_resize(dict_t *dict)
 {
+    uint64_t index = 0;
     uint64_t new_size = dict->size * DICT_RESIZE_FACTOR;
-    bucket_t *new_buckets = calloc(new_size, sizeof(bucket_t));
+    bucket_t **new_buckets = compute_new_buckets(new_size);
 
     if (NULL == new_buckets)
         return -1;
-    /* TODO: Logic to retrieve all keys and recompute them. */
-    /* TODO: Move the entry. Do not destroy / construct new ones. */
-    /* TODO: If everything looks good, delete all linked nodes, not entries */
+    for (; index < dict->size; ++index)
+        dict_rehash_bucket(dict->buckets[index], new_buckets, new_size);
+    dict_buckets_dtor(dict->buckets, dict->size);
+    free(dict->buckets);
+    dict->buckets = new_buckets;
+    dict->size = new_size;
     return 0;
 }

@@ -59,12 +59,12 @@
 #define HASH_SEED 0
 
 /**
- * @brief Returns a pointer to the bucket in which to store the entry.
+ * @brief Returns the index to the bucket in which to store the entry.
  *
- * @param D The dict.
  * @param H The key hash.
+ * @param S The size of the buckets array.
  */
-#define DICT_GRAB_BUCKET(D, H) &(D)->buckets[(H) & (D)->size]
+#define DICT_BUCKET_IDX(H, S) (H) & (S)
 
 typedef struct s_entry {
     /** The key used to refer to the value. */
@@ -111,16 +111,49 @@ typedef struct s_dict {
     /** Number of allocated buckets. */
     uint64_t size;
 
-    /** Array of buckets. */
-    bucket_t *buckets;
+    /** Array of buckets linked list. */
+    bucket_t **buckets;
 } dict_t;
 
 /**
- * @brief Allocates a new dict. If it failed, returns `NULL`.
+ * @brief Allocates a new dict.
+ *
+ * If it failed, returns `NULL`.
  *
  * @return The allocated dict.
  */
 dict_t *dict_ctor(void);
+
+/**
+ * @brief Allocates new buckets linked list inside the array.
+ *
+ * If it failed to allocate one bucket, it free all the previously allocated
+ * ones before returning -1.
+ *
+ * If existing buckets are already allocated inside the array, they will not
+ * be free by this function. The programmer will have to free them first, even
+ * though the purpose of this function is to allocate buckets of a new buckets
+ * array that has just been allocated.
+ *
+ * If the buckets array is a `NULL` pointer, the function will crash.
+ *
+ * @param buckets The pre-allocated buckets array.
+ * @param size The number of buckets to allocate inside the buckets array.
+ * @return 0 on success, -1 on error.
+ */
+int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
+
+/**
+ * @brief Deallocates buckets linked list from the array.
+ *
+ * This function will not free the buckets array, just it's elements.
+ *
+ * If the buckets array is a `NULL` pointer, the function will crash.
+ *
+ * @param buckets The pre-allocated buckets array.
+ * @param size The nuber of buckets to deallocate from the buckets array.
+ */
+void dict_buckets_dtor(bucket_t **buckets, uint64_t size);
 
 /**
  * @brief Deallocates the dict.
@@ -134,6 +167,20 @@ dict_t *dict_ctor(void);
  * @param dict The dict's pointer to deallocate.
  */
 void dict_dtor(dict_t *dict);
+
+/**
+ * @brief Inserts an entry into a dict bucket.
+ *
+ * If it failed to allocate the linked list bucket node, the bucket is left
+ * unchanged and the function returns -1.
+ *
+ * If a `NULL` pointer is passed for bucket, the function will crash.
+ *
+ * @param bucket The pointer to the allocated bucket.
+ * @param entry The entry to insert.
+ * @return 0 on success, -1 on error.
+ */
+int dict_bucket_insert(bucket_t **bucket, const entry_t *entry);
 
 /**
  * @brief Insert an entry into the dict.

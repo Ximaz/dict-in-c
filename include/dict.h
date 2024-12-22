@@ -97,6 +97,22 @@ typedef struct s_bucket {
     struct s_bucket *next;
 } bucket_t;
 
+/**
+ * @brief This structur erepresents the state of a dict (hashmap) object. Upon
+ * insertion, the string keys are hashed using Murmurhash1 algorithm. They are
+ * then stored inside a linked list (bucket), inside an array (buckets).
+ *
+ * Upon key insertion, if the number of items is greater than half the size,
+ * the buckets array is enlarged and all the key hashes are re-computed.
+ *
+ * Upon key deletion, if the number of items is lower than the DICT_MIN_SIZE
+ * value, the buckets array is reduced and all the key hashes are re-comupted.
+ *
+ * If a key is inserted twice, it's entry is overwritten to store the new value
+ * associated to that key. If the entry value was already allocated, the memory
+ * will not be released correctly, unless the programmer does it before using
+ * the same key twice (or more).
+ */
 typedef struct s_dict {
     /** Total number of entries. */
     uint64_t items;
@@ -107,6 +123,34 @@ typedef struct s_dict {
     /** Array of buckets linked list. */
     bucket_t **buckets;
 } dict_t;
+
+/**
+ * @brief This structure represents the keys of the dict. It will be computed
+ * each time the dict_keys() function is called. It will not be used by other
+ * function to operate on the dict, as the internal dict state is known by all
+ * functions.
+ */
+typedef struct s_dict_keys {
+    /** Number of keys. Same value as the 'items' dict_t member. */
+    uint64_t size;
+
+    /** The keys in a string array of length 'size'.  */
+    const char **keys;
+} dict_keys_t;
+
+/**
+ * @brief This structure represents the values of the dict. It will be computed
+ * each time the dict_values() function is called. It will not be used by other
+ * function to operate on the dict, as the internal dict state is known by all
+ * functions.
+ */
+typedef struct s_dict_values {
+    /** Number of values. Same value as the 'items' dict_t member. */
+    uint64_t size;
+
+    /** The values in a string array of length 'size'.  */
+    const void **values;
+} dict_values_t;
 
 /**
  * @brief Allocates a new dict.

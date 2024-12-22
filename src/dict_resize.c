@@ -20,7 +20,8 @@
  * @param new_size The number of buckets to allocate.
  * @return The allocated buckets array on success, `NULL` pointer on error.
  */
-static bucket_t **compute_new_buckets(uint64_t new_size)
+static
+bucket_t **compute_new_buckets(uint64_t new_size)
 {
     bucket_t **new_buckets = calloc(new_size, sizeof(bucket_t *));
 
@@ -47,7 +48,8 @@ static bucket_t **compute_new_buckets(uint64_t new_size)
  * @param new_buckets The linked list buckets array receiving the entries.
  * @param new_size The linked list buckets array size.
  */
-static void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
+static
+void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
     uint64_t new_size)
 {
     uint32_t key_hash = 0;
@@ -56,7 +58,7 @@ static void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
 
     while (NULL != bucket) {
         entry = bucket->entry;
-        key_hash = hash(entry->key, strlen(entry->key), HASH_SEED);
+        key_hash = murmurhash1(entry->key, strlen(entry->key), HASH_SEED);
         new_bucket = new_buckets[DICT_BUCKET_IDX(key_hash, new_size)];
         dict_bucket_insert(&new_bucket, entry);
         bucket = bucket->next;

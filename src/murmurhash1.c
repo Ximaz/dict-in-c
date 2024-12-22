@@ -25,7 +25,7 @@ uint32_t compute_padding(const uint8_t *data, uint64_t length, uint32_t h)
 }
 
 inline
-uint32_t hash(const void *key, uint64_t length, uint32_t seed)
+uint32_t murmurhash1(const void *key, uint64_t length, uint32_t seed)
 {
     uint32_t h = seed ^ (length * M);
     const uint8_t *data = (const uint8_t *) key;

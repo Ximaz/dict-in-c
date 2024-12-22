@@ -16,46 +16,46 @@
 #define SEED 0
 #define EXPECTED 1637579608
 
-Test(hash, passing_with_expected_value)
+Test(murmurhash1, passing_with_expected_value)
 {
     const char *key = KEY_VALUE;
 
-    uint32_t hash_value = hash((const void *) key, KEY_LENGTH, SEED);
+    uint32_t hash_value = murmurhash1((const void *) key, KEY_LENGTH, SEED);
 
     cr_expect(eq(int, hash_value, EXPECTED));
 }
 
-Test(hash, passing_with_heap)
+Test(murmurhash1, passing_with_heap)
 {
     const char *key1 = KEY_VALUE;
     char *key2 = malloc(sizeof(char) * KEY_LENGTH + 1);
 
     memset(key2, 0, KEY_LENGTH + 1);
     strcpy(key2, key1);
-    uint32_t hash1 = hash((const void *) key1, KEY_LENGTH, SEED);
-    uint32_t hash2 = hash((const void *) key2, KEY_LENGTH, SEED);
+    uint32_t hash1 = murmurhash1((const void *) key1, KEY_LENGTH, SEED);
+    uint32_t hash2 = murmurhash1((const void *) key2, KEY_LENGTH, SEED);
 
     cr_expect(eq(int, hash1, hash2));
     free(key2);
 }
 
-Test(hash, passing_with_stack)
+Test(murmurhash1, passing_with_stack)
 {
     const char *key1 = KEY_VALUE;
     const char *key2 = KEY_VALUE;
 
-    uint32_t hash1 = hash((const void *) key1, KEY_LENGTH, SEED);
-    uint32_t hash2 = hash((const void *) key2, KEY_LENGTH, SEED);
+    uint32_t hash1 = murmurhash1((const void *) key1, KEY_LENGTH, SEED);
+    uint32_t hash2 = murmurhash1((const void *) key2, KEY_LENGTH, SEED);
 
     cr_expect(eq(int, hash1, hash2));
 }
 
-Test(hash, passing_with_same_pointer)
+Test(murmurhash1, passing_with_same_pointer)
 {
     const char *key = KEY_VALUE;
 
-    uint32_t hash1 = hash((const void *) key, KEY_LENGTH, SEED);
-    uint32_t hash2 = hash((const void *) key, KEY_LENGTH, SEED);
+    uint32_t hash1 = murmurhash1((const void *) key, KEY_LENGTH, SEED);
+    uint32_t hash2 = murmurhash1((const void *) key, KEY_LENGTH, SEED);
 
     cr_expect(eq(int, hash1, hash2));
 }

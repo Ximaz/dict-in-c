@@ -21,7 +21,7 @@ int dict_insert(dict_t *dict, const char *key, uint64_t key_length,
     entry = entry_ctor(key, value);
     if (NULL == entry)
         return -1;
-    key_hash = hash(key, key_length, HASH_SEED);
+    key_hash = murmurhash1(key, key_length, HASH_SEED);
     bucket = dict->buckets[DICT_BUCKET_IDX(key_hash, dict->size)];
     if (-1 == dict_bucket_insert(&bucket, entry))
         return -1;

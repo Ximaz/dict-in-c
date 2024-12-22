@@ -1,8 +1,8 @@
 /*
 ** XIMAZ PROJECTS, 2024
-** tests_dict_ctor.c
+** tests_dict_insert.c
 ** File description:
-** Unit tests for the dict constructor and destructor.
+** Unit tests for the dict insert function.
 */
 
 #include <stdlib.h>

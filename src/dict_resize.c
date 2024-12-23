@@ -64,7 +64,11 @@ void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
 }
 
 /**
+ * @brief This function makes sure the new size is a power of 2.
+ *
  * @see https://github.com/python/cpython/blob/main/Python/hashtable.c#L108
+ *
+ * @return The actual new size to use.
  */
 static
 uint64_t round_size(uint64_t new_size)

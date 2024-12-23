@@ -110,6 +110,7 @@ $(function(){initNavTree('dict__get__keys_8c.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a51aaec80a0fe9f068819af6b30fa8265" id="r_a51aaec80a0fe9f068819af6b30fa8265"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51aaec80a0fe9f068819af6b30fa8265">populate_keys</a> (const <a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict, <a class="el" href="dict_8h.html#a37acf3a986b4069a5498454665a83be7">dict_keys_t</a> *keys)</td></tr>
+<tr class="memdesc:a51aaec80a0fe9f068819af6b30fa8265"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will extract the keys from each bucket of the dict and place their reference to the <code>keys</code> member of the <code>keys</code> array.  <br /></td></tr>
 <tr class="separator:a51aaec80a0fe9f068819af6b30fa8265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d2857cb35bbf508db10954af07a9768" id="r_a7d2857cb35bbf508db10954af07a9768"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dict_8h.html#a37acf3a986b4069a5498454665a83be7">dict_keys_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d2857cb35bbf508db10954af07a9768">dict_get_keys</a> (const <a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict)</td></tr>
 <tr class="memdesc:a7d2857cb35bbf508db10954af07a9768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the list of the keys of the dict.  <br /></td></tr>
@@ -146,26 +147,26 @@ DO NOT TRY TO FREE ANY ITEM INSIDE THE <code>keys</code> MEMBER BY YOURSELF. The
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The list of keys. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dict__get__keys_8c_source.html#l00028">28</a> of file <a class="el" href="dict__get__keys_8c_source.html">dict_get_keys.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   29</span>{</div>
-<div class="line"><span class="lineno">   30</span>    <a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a> *keys = (<a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a> *) calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a>));</div>
-<div class="line"><span class="lineno">   31</span> </div>
-<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">if</span> (NULL == keys)</div>
-<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   34</span>    keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a> = (<span class="keyword">const</span> <span class="keywordtype">char</span> **) calloc(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span> *));</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">if</span> (NULL == keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a>) {</div>
-<div class="line"><span class="lineno">   36</span>        free(keys);</div>
-<div class="line"><span class="lineno">   37</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   38</span>    }</div>
-<div class="line"><span class="lineno">   39</span>    <a class="code hl_function" href="#a51aaec80a0fe9f068819af6b30fa8265">populate_keys</a>(dict, keys);</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">return</span> keys;</div>
-<div class="line"><span class="lineno">   41</span>}</div>
-<div class="ttc" id="adict__get__keys_8c_html_a51aaec80a0fe9f068819af6b30fa8265"><div class="ttname"><a href="#a51aaec80a0fe9f068819af6b30fa8265">populate_keys</a></div><div class="ttdeci">static void populate_keys(const dict_t *dict, dict_keys_t *keys)</div><div class="ttdef"><b>Definition</b> <a href="dict__get__keys_8c_source.html#l00013">dict_get_keys.c:13</a></div></div>
+<p class="definition">Definition at line <a class="el" href="dict__get__keys_8c_source.html#l00035">35</a> of file <a class="el" href="dict__get__keys_8c_source.html">dict_get_keys.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
+<div class="line"><span class="lineno">   37</span>    <a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a> *keys = (<a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a> *) calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structs__dict__keys.html">dict_keys_t</a>));</div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (NULL == keys)</div>
+<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   41</span>    keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a> = (<span class="keyword">const</span> <span class="keywordtype">char</span> **) calloc(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span> *));</div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">if</span> (NULL == keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a>) {</div>
+<div class="line"><span class="lineno">   43</span>        free(keys);</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">   45</span>    }</div>
+<div class="line"><span class="lineno">   46</span>    <a class="code hl_function" href="#a51aaec80a0fe9f068819af6b30fa8265">populate_keys</a>(dict, keys);</div>
+<div class="line"><span class="lineno">   47</span>    <span class="keywordflow">return</span> keys;</div>
+<div class="line"><span class="lineno">   48</span>}</div>
+<div class="ttc" id="adict__get__keys_8c_html_a51aaec80a0fe9f068819af6b30fa8265"><div class="ttname"><a href="#a51aaec80a0fe9f068819af6b30fa8265">populate_keys</a></div><div class="ttdeci">static void populate_keys(const dict_t *dict, dict_keys_t *keys)</div><div class="ttdoc">This function will extract the keys from each bucket of the dict and place their reference to the key...</div><div class="ttdef"><b>Definition</b> <a href="dict__get__keys_8c_source.html#l00020">dict_get_keys.c:20</a></div></div>
 <div class="ttc" id="astructs__dict__keys_html"><div class="ttname"><a href="structs__dict__keys.html">s_dict_keys</a></div><div class="ttdoc">This structure represents the keys of the dict. It will be computed each time the dict_keys() functio...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00282">dict.h:282</a></div></div>
 <div class="ttc" id="astructs__dict__keys_html_a06f0b2ba80c00fe0335494f6df9a0df2"><div class="ttname"><a href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">s_dict_keys::keys</a></div><div class="ttdeci">const char ** keys</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00291">dict.h:291</a></div></div>
 <div class="ttc" id="astructs__dict_html_a70b91e54a49a08e0d06539a06c665f89"><div class="ttname"><a href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">s_dict::items</a></div><div class="ttdeci">uint64_t items</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00192">dict.h:192</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00192">s_dict::items</a>, <a class="el" href="dict_8h_source.html#l00291">s_dict_keys::keys</a>, and <a class="el" href="dict__get__keys_8c_source.html#l00013">populate_keys()</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00192">s_dict::items</a>, <a class="el" href="dict_8h_source.html#l00291">s_dict_keys::keys</a>, and <a class="el" href="dict__get__keys_8c_source.html#l00020">populate_keys()</a>.</p>
 
 </div>
 </div>
@@ -196,20 +197,29 @@ DO NOT TRY TO FREE ANY ITEM INSIDE THE <code>keys</code> MEMBER BY YOURSELF. The
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dict__get__keys_8c_source.html#l00013">13</a> of file <a class="el" href="dict__get__keys_8c_source.html">dict_get_keys.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   14</span>{</div>
-<div class="line"><span class="lineno">   15</span>    uint64_t index = 0;</div>
-<div class="line"><span class="lineno">   16</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *bucket = NULL;</div>
-<div class="line"><span class="lineno">   17</span> </div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">for</span> (; index &lt; dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>; ++index) {</div>
-<div class="line"><span class="lineno">   19</span>        bucket = dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[index];</div>
-<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">while</span> (NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
-<div class="line"><span class="lineno">   21</span>            keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a>[keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#abcd0fd3d85df6977a47ffa62cb22d3a6">size</a>++] = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>;</div>
-<div class="line"><span class="lineno">   22</span>            bucket = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><span class="lineno">   23</span>        }</div>
-<div class="line"><span class="lineno">   24</span>    }</div>
-<div class="line"><span class="lineno">   25</span>    assert(keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#abcd0fd3d85df6977a47ffa62cb22d3a6">size</a> == dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>);</div>
-<div class="line"><span class="lineno">   26</span>}</div>
+<p>This function will extract the keys from each bucket of the dict and place their reference to the <code>keys</code> member of the <code>keys</code> array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dict</td><td>The dict to get the keys from. </td></tr>
+    <tr><td class="paramname">keys</td><td>The keys object in which to set the keys. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="dict__get__keys_8c_source.html#l00020">20</a> of file <a class="el" href="dict__get__keys_8c_source.html">dict_get_keys.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>{</div>
+<div class="line"><span class="lineno">   22</span>    uint64_t index = 0;</div>
+<div class="line"><span class="lineno">   23</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *bucket = NULL;</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">for</span> (; index &lt; dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>; ++index) {</div>
+<div class="line"><span class="lineno">   26</span>        bucket = dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[index];</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">while</span> (NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
+<div class="line"><span class="lineno">   28</span>            keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a>[keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#abcd0fd3d85df6977a47ffa62cb22d3a6">size</a>++] = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>;</div>
+<div class="line"><span class="lineno">   29</span>            bucket = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
+<div class="line"><span class="lineno">   30</span>        }</div>
+<div class="line"><span class="lineno">   31</span>    }</div>
+<div class="line"><span class="lineno">   32</span>    assert(keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#abcd0fd3d85df6977a47ffa62cb22d3a6">size</a> == dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>);</div>
+<div class="line"><span class="lineno">   33</span>}</div>
 <div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00082">dict.h:82</a></div></div>
 <div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00084">dict.h:84</a></div></div>
 <div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00090">dict.h:90</a></div></div>
@@ -219,7 +229,7 @@ DO NOT TRY TO FREE ANY ITEM INSIDE THE <code>keys</code> MEMBER BY YOURSELF. The
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="dict_8h_source.html#l00198">s_dict::buckets</a>, <a class="el" href="dict_8h_source.html#l00192">s_dict::items</a>, <a class="el" href="dict_8h_source.html#l00084">s_bucket::key</a>, <a class="el" href="dict_8h_source.html#l00291">s_dict_keys::keys</a>, <a class="el" href="dict_8h_source.html#l00090">s_bucket::next</a>, <a class="el" href="dict_8h_source.html#l00195">s_dict::size</a>, and <a class="el" href="dict_8h_source.html#l00284">s_dict_keys::size</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__get__keys_8c_source.html#l00028">dict_get_keys()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__get__keys_8c_source.html#l00035">dict_get_keys()</a>.</p>
 
 </div>
 </div>

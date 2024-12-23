@@ -9,6 +9,13 @@
 #include <stdlib.h>
 #include "dict.h"
 
+/**
+ * @brief This function will extract the values from each bucket of the dict
+ * and place their reference to the `values` member of the `values` array.
+ *
+ * @param dict The dict to get the values from.
+ * @param values The values object in which to set the values.
+ */
 static
 void populate_values(const dict_t *dict, dict_values_t *values)
 {

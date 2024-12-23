@@ -9,6 +9,13 @@
 #include <stdlib.h>
 #include "dict.h"
 
+/**
+ * @brief This function will extract the keys from each bucket of the dict and
+ * place their reference to the `keys` member of the `keys` array.
+ *
+ * @param dict The dict to get the keys from.
+ * @param keys The keys object in which to set the keys.
+ */
 static
 void populate_keys(const dict_t *dict, dict_keys_t *keys)
 {

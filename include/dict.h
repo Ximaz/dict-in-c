@@ -285,7 +285,11 @@ typedef struct s_dict_keys {
     /** Number of keys. Same value as the 'items' dict_t member. */
     uint64_t size;
 
-    /** The keys in a string array of length 'size'.  */
+    /**
+     * The keys in a string array of length 'size'.
+     *
+     * @attention DO NOT TRY TO FREE THE MEMORY OF ANY ITEM FROM THAT ARRAY.
+     */
     const char **keys;
 } dict_keys_t;
 
@@ -295,6 +299,10 @@ typedef struct s_dict_keys {
  *
  * If an error occured during the dict_keys_t object allocation, `NULL` pointer
  * is returned.
+ *
+ * @attention DO NOT TRY TO FREE ANY KEY INSIDE THE `keys` MEMBER BY YOURSELF.
+ * The `keys` array member contains references to the dict keys, not a copy. If
+ * you free one of them, it may break the whole dict object.
  *
  * The `dict_keys_t` object will have to be free using the `dict_free_keys`
  * function.
@@ -319,7 +327,7 @@ dict_keys_t *dict_get_keys(const dict_t *dict);
  * If a `NULL` pointer is passed, or if the dict keys have already been
  * deallocated, the function will crash.
  *
- * @param dict_keys The keys to free. (output of `dict_get_keys` function)
+ * @param dict_keys The keys to free.
  */
 void dict_free_keys(dict_keys_t *dict_keys);
 
@@ -333,9 +341,51 @@ typedef struct s_dict_values {
     /** Number of values. Same value as the 'items' dict_t member. */
     uint64_t size;
 
-    /** The values in a string array of length 'size'.  */
+    /**
+     * The values in a string array of length 'size'.
+     *
+     * @attention DO NOT TRY TO FREE THE MEMORY OF ANY ITEM FROM THAT ARRAY.
+     */
     const void **values;
 } dict_values_t;
+
+/**
+ * @file src/dict_get_values.c
+ * @brief Returns the list of the values of the dict.
+ *
+ * If an error occured during the dict_values_t object allocation, `NULL`
+ * pointer is returned.
+ *
+ * @attention DO NOT TRY TO FREE ANY KEY INSIDE THE `values` MEMBER BY
+ * YOURSELF. The `values` array member contains references to the dict values,
+ * not a copy. If you free one of them, it may break the whole dict object.
+ *
+ * The `dict_values_t` object will have to be free using the `dict_free_values`
+ * function.
+ *
+ * If a `NULL` pointer is passed, or if the dict has already been deallocated,
+ * the function will crash.
+ *
+ * @note The list of values is not ordered. The values are taken from each
+ * bucket from 0 to the size of the dict, and each of the bucket is iterated
+ * over from head to tail (linked list). Knowing that the insertion depends on
+ * a hash, we don't know the order in which the values will appear in the list.
+ *
+ * @param dict The dict from which to get the values.
+ * @return The list of values.
+ */
+dict_values_t *dict_get_values(const dict_t *dict);
+
+/**
+ * @file src/dict_free_values.c
+ * @brief Release memory from `dict_get_values` allocations.
+ *
+ * If a `NULL` pointer is passed, or if the dict values have already been
+ * deallocated, the function will crash.
+ *
+ * @param dict_values The values to free.
+ */
+void dict_free_values(dict_values_t *dict_keys);
 
 
 #endif /* !__DICT_H_ */

@@ -8,19 +8,30 @@
 #include <stdio.h>
 #include "dict.h"
 
-void dict_buckets_debug(bucket_t *const *buckets, uint64_t size)
+static
+void print_bucket(const bucket_t *bucket, uint64_t index)
 {
-    const bucket_t *bucket = NULL;
-    uint64_t index = 0;
     uint64_t node_index = 0;
 
-    for (; index < size; ++index) {
-        bucket = buckets[index];
-        node_index = 0;
-        fprintf(stderr, "Buckets[%lu] : %p\n", index, (void *) bucket);
-        while (NULL != bucket) {
-            fprintf(stderr, "- [%lu] = %s\n", node_index, bucket->key);
-            bucket = bucket->next;
-        }
+#ifndef __APPLE__
+    fprintf(stderr, "Buckets[%lu] : %p\n", index, (void *) bucket);
+#else
+    fprintf(stderr, "Buckets[%llu] : %p\n", index, (void *) bucket);
+#endif
+    while (NULL != bucket) {
+#ifndef __APPLE__
+        fprintf(stderr, "- [%lu] = %s\n", node_index, bucket->key);
+#else
+        fprintf(stderr, "- [%llu] = %s\n", node_index, bucket->key);
+#endif
+        bucket = bucket->next;
     }
+}
+
+void dict_buckets_debug(bucket_t *const *buckets, uint64_t size)
+{
+    uint64_t index = 0;
+
+    for (; index < size; ++index)
+        print_bucket(buckets[index], index);
 }

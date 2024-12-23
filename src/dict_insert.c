@@ -9,10 +9,6 @@
 #include "dict.h"
 #include "murmurhash1.h"
 
-/**
- * TODO: Return an error if the key is already set in the dict. C.f. the note
- * on the free_pair_t function typedef.
- */
 int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value)
 {
     uint32_t key_hash = 0;
@@ -22,7 +18,8 @@ int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value)
         return -1;
     key_hash = murmurhash1(key, key_length, HASH_SEED);
     bucket_addr = &(dict->buckets[DICT_BUCKET_IDX(key_hash, dict->size)]);
-    if (-1 == dict_bucket_insert(bucket_addr, key, value))
+    if (1 == dict_bucket_has_key(*bucket_addr, key) || \
+        -1 == dict_bucket_insert(bucket_addr, key, value))
         return -1;
     ++dict->items;
     return 0;

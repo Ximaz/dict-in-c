@@ -108,16 +108,14 @@ $(function(){initNavTree('dict__buckets__dtor_8c.html',''); initResizable(true);
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8ad7b0cf98ec00acd53aba3211481cc4" id="r_a8ad7b0cf98ec00acd53aba3211481cc4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ad7b0cf98ec00acd53aba3211481cc4">dict_bucket_dtor</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *bucket)</td></tr>
-<tr class="separator:a8ad7b0cf98ec00acd53aba3211481cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9526fb6fc778427949479f61b02abbe2" id="r_a9526fb6fc778427949479f61b02abbe2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9526fb6fc778427949479f61b02abbe2">dict_bucket_dtor_with_entries</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *bucket, <a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a> free_value)</td></tr>
-<tr class="separator:a9526fb6fc778427949479f61b02abbe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dcdc971e03fd77b0a0584e9eda3c9e2" id="r_a7dcdc971e03fd77b0a0584e9eda3c9e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7dcdc971e03fd77b0a0584e9eda3c9e2">dict_buckets_dtor</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> **buckets, uint64_t size, int free_entry, <a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a> free_value)</td></tr>
-<tr class="separator:a7dcdc971e03fd77b0a0584e9eda3c9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add14402fbc68afc6e8a89e346a0042dd" id="r_add14402fbc68afc6e8a89e346a0042dd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add14402fbc68afc6e8a89e346a0042dd">dict_bucket_dtor</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *bucket, <a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</td></tr>
+<tr class="separator:add14402fbc68afc6e8a89e346a0042dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac20f129d95f8bf5e1ec41b351d4e7046" id="r_ac20f129d95f8bf5e1ec41b351d4e7046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> **buckets, uint64_t size, <a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</td></tr>
+<tr class="separator:ac20f129d95f8bf5e1ec41b351d4e7046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8ad7b0cf98ec00acd53aba3211481cc4" name="a8ad7b0cf98ec00acd53aba3211481cc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ad7b0cf98ec00acd53aba3211481cc4">&#9670;&#160;</a></span>dict_bucket_dtor()</h2>
+<a id="add14402fbc68afc6e8a89e346a0042dd" name="add14402fbc68afc6e8a89e346a0042dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add14402fbc68afc6e8a89e346a0042dd">&#9670;&#160;</a></span>dict_bucket_dtor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,8 +126,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static void dict_bucket_dtor </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *</td>          <td class="paramname"><span class="paramname"><em>bucket</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *</td>          <td class="paramname"><span class="paramname"><em>bucket</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></td>          <td class="paramname"><span class="paramname"><em>free_pair</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -143,70 +145,33 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
 <div class="line"><span class="lineno">   14</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *next = NULL;</div>
 <div class="line"><span class="lineno">   15</span> </div>
-<div class="line"><span class="lineno">   16</span>    <span class="keywordflow">while</span> (NULL != bucket) {</div>
-<div class="line"><span class="lineno">   17</span>        next = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><span class="lineno">   18</span>        free(bucket);</div>
-<div class="line"><span class="lineno">   19</span>        bucket = next;</div>
-<div class="line"><span class="lineno">   20</span>    }</div>
-<div class="line"><span class="lineno">   21</span>}</div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00108">dict.h:108</a></div></div>
-<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00113">dict.h:113</a></div></div>
+<div class="line"><span class="lineno">   16</span>    <span class="keywordflow">if</span> (NULL != free_pair)</div>
+<div class="line"><span class="lineno">   17</span>        <span class="keywordflow">while</span> (NULL != bucket) {</div>
+<div class="line"><span class="lineno">   18</span>            next = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
+<div class="line"><span class="lineno">   19</span>            free_pair(bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">value</a>);</div>
+<div class="line"><span class="lineno">   20</span>            free(bucket);</div>
+<div class="line"><span class="lineno">   21</span>            bucket = next;</div>
+<div class="line"><span class="lineno">   22</span>        }</div>
+<div class="line"><span class="lineno">   23</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">while</span> (NULL != bucket) {</div>
+<div class="line"><span class="lineno">   25</span>            next = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
+<div class="line"><span class="lineno">   26</span>            free(bucket);</div>
+<div class="line"><span class="lineno">   27</span>            bucket = next;</div>
+<div class="line"><span class="lineno">   28</span>        }</div>
+<div class="line"><span class="lineno">   29</span>}</div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00096">dict.h:96</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a21984e3cea02225302d8c517cf11fa4f"><div class="ttname"><a href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">s_bucket::value</a></div><div class="ttdeci">void * value</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00099">dict.h:99</a></div></div>
+<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00102">dict.h:102</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00113">s_bucket::next</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00096">s_bucket::key</a>, <a class="el" href="dict_8h_source.html#l00102">s_bucket::next</a>, and <a class="el" href="dict_8h_source.html#l00099">s_bucket::value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor()</a>.</p>
-
-</div>
-</div>
-<a id="a9526fb6fc778427949479f61b02abbe2" name="a9526fb6fc778427949479f61b02abbe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9526fb6fc778427949479f61b02abbe2">&#9670;&#160;</a></span>dict_bucket_dtor_with_entries()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static void dict_bucket_dtor_with_entries </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *</td>          <td class="paramname"><span class="paramname"><em>bucket</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a></td>          <td class="paramname"><span class="paramname"><em>free_value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="dict__buckets__dtor_8c_source.html#l00024">24</a> of file <a class="el" href="dict__buckets__dtor_8c_source.html">dict_buckets_dtor.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   25</span>{</div>
-<div class="line"><span class="lineno">   26</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *next = NULL;</div>
-<div class="line"><span class="lineno">   27</span> </div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">while</span> (NULL != bucket) {</div>
-<div class="line"><span class="lineno">   29</span>        next = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">if</span> (NULL != free_value)</div>
-<div class="line"><span class="lineno">   31</span>            free_value(bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a6ea4b24a5328f36fe0a52af70bcfdca0">entry</a>);</div>
-<div class="line"><span class="lineno">   32</span>        free(bucket);</div>
-<div class="line"><span class="lineno">   33</span>        bucket = next;</div>
-<div class="line"><span class="lineno">   34</span>    }</div>
-<div class="line"><span class="lineno">   35</span>}</div>
-<div class="ttc" id="astructs__bucket_html_a6ea4b24a5328f36fe0a52af70bcfdca0"><div class="ttname"><a href="structs__bucket.html#a6ea4b24a5328f36fe0a52af70bcfdca0">s_bucket::entry</a></div><div class="ttdeci">entry_t * entry</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00110">dict.h:110</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00110">s_bucket::entry</a>, and <a class="el" href="dict_8h_source.html#l00113">s_bucket::next</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor()</a>.</p>
 
 </div>
 </div>
-<a id="a7dcdc971e03fd77b0a0584e9eda3c9e2" name="a7dcdc971e03fd77b0a0584e9eda3c9e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dcdc971e03fd77b0a0584e9eda3c9e2">&#9670;&#160;</a></span>dict_buckets_dtor()</h2>
+<a id="ac20f129d95f8bf5e1ec41b351d4e7046" name="ac20f129d95f8bf5e1ec41b351d4e7046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac20f129d95f8bf5e1ec41b351d4e7046">&#9670;&#160;</a></span>dict_buckets_dtor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,33 +189,23 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>free_entry</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a></td>          <td class="paramname"><span class="paramname"><em>free_value</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></td>          <td class="paramname"><span class="paramname"><em>free_pair</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">37</a> of file <a class="el" href="dict__buckets__dtor_8c_source.html">dict_buckets_dtor.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   39</span>{</div>
-<div class="line"><span class="lineno">   40</span>    uint64_t index = 0;</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">for</span> (; index &lt; size; ++index) {</div>
-<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">if</span> (1 == free_entry)</div>
-<div class="line"><span class="lineno">   44</span>            <a class="code hl_function" href="#a9526fb6fc778427949479f61b02abbe2">dict_bucket_dtor_with_entries</a>(buckets[index], free_value);</div>
-<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   46</span>            <a class="code hl_function" href="#a8ad7b0cf98ec00acd53aba3211481cc4">dict_bucket_dtor</a>(buckets[index]);</div>
-<div class="line"><span class="lineno">   47</span>    }</div>
-<div class="line"><span class="lineno">   48</span>}</div>
-<div class="ttc" id="adict__buckets__dtor_8c_html_a8ad7b0cf98ec00acd53aba3211481cc4"><div class="ttname"><a href="#a8ad7b0cf98ec00acd53aba3211481cc4">dict_bucket_dtor</a></div><div class="ttdeci">static void dict_bucket_dtor(bucket_t *bucket)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00012">dict_buckets_dtor.c:12</a></div></div>
-<div class="ttc" id="adict__buckets__dtor_8c_html_a9526fb6fc778427949479f61b02abbe2"><div class="ttname"><a href="#a9526fb6fc778427949479f61b02abbe2">dict_bucket_dtor_with_entries</a></div><div class="ttdeci">static void dict_bucket_dtor_with_entries(bucket_t *bucket, free_value_t free_value)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00024">dict_buckets_dtor.c:24</a></div></div>
+<p class="definition">Definition at line <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">31</a> of file <a class="el" href="dict__buckets__dtor_8c_source.html">dict_buckets_dtor.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   33</span>{</div>
+<div class="line"><span class="lineno">   34</span>    uint64_t index = 0;</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordflow">for</span> (; index &lt; size; ++index)</div>
+<div class="line"><span class="lineno">   37</span>        <a class="code hl_function" href="#add14402fbc68afc6e8a89e346a0042dd">dict_bucket_dtor</a>(buckets[index], free_pair);</div>
+<div class="line"><span class="lineno">   38</span>}</div>
+<div class="ttc" id="adict__buckets__dtor_8c_html_add14402fbc68afc6e8a89e346a0042dd"><div class="ttname"><a href="#add14402fbc68afc6e8a89e346a0042dd">dict_bucket_dtor</a></div><div class="ttdeci">static void dict_bucket_dtor(bucket_t *bucket, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00012">dict_buckets_dtor.c:12</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict__buckets__dtor_8c_source.html#l00012">dict_bucket_dtor()</a>, and <a class="el" href="dict__buckets__dtor_8c_source.html#l00024">dict_bucket_dtor_with_entries()</a>.</p>
+<p class="reference">References <a class="el" href="dict__buckets__dtor_8c_source.html#l00012">dict_bucket_dtor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor()</a>, <a class="el" href="dict__dtor_8c_source.html#l00011">dict_dtor()</a>, and <a class="el" href="dict__resize_8c_source.html#l00083">dict_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor()</a>, <a class="el" href="dict__dtor_8c_source.html#l00011">dict_dtor()</a>, and <a class="el" href="dict__resize_8c_source.html#l00081">dict_resize()</a>.</p>
 
 </div>
 </div>

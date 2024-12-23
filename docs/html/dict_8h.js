@@ -1,6 +1,5 @@
 var dict_8h =
 [
-    [ "s_entry", "structs__entry.html", "structs__entry" ],
     [ "s_bucket", "structs__bucket.html", "structs__bucket" ],
     [ "s_dict", "structs__dict.html", "structs__dict" ],
     [ "s_dict_keys", "structs__dict__keys.html", "structs__dict__keys" ],
@@ -17,16 +16,17 @@ var dict_8h =
     [ "dict_keys_t", "dict_8h.html#a37acf3a986b4069a5498454665a83be7", null ],
     [ "dict_t", "dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b", null ],
     [ "dict_values_t", "dict_8h.html#aff87357254fc41160f05530cf9e49942", null ],
-    [ "entry_t", "dict_8h.html#a7734bd81eb19697cae0398ac4b0d6941", null ],
-    [ "free_value_t", "dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a", null ],
-    [ "dict_bucket_insert", "dict_8h.html#a0e8cbe3cd6223a6816ce82b8f8da0bf6", null ],
+    [ "free_pair_t", "dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927", null ],
+    [ "dict_bucket_insert", "dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6", null ],
     [ "dict_buckets_ctor", "dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb", null ],
     [ "dict_buckets_debug", "dict_8h.html#aa45227550c22a8eb6e3af274ed91488c", null ],
-    [ "dict_buckets_dtor", "dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203", null ],
+    [ "dict_buckets_dtor", "dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046", null ],
     [ "dict_ctor", "dict_8h.html#aabe6f8d8d416984156a7187650b66d43", null ],
-    [ "dict_dtor", "dict_8h.html#ad35641192cf77a66618392fd111e3cf8", null ],
-    [ "dict_insert", "dict_8h.html#a0c2bdb9689f87bc84fd6f38f8d5ba73a", null ],
-    [ "dict_resize", "dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a", null ],
-    [ "entry_ctor", "dict_8h.html#a4f3b40b0c56fd02be29f1de949f46a19", null ],
-    [ "entry_dtor", "dict_8h.html#a8b265ebe0731182ef08fbec31ef004fc", null ]
+    [ "dict_dtor", "dict_8h.html#ab31bdadc44fa3d4dc062d85bbe274975", null ],
+    [ "dict_free_keys", "dict_8h.html#adef26a5494c9bdd0e75276c4ea717d79", null ],
+    [ "dict_free_values", "dict_8h.html#afb28f41a0826eea61df21fd8b6e24fb7", null ],
+    [ "dict_get_keys", "dict_8h.html#a7d2857cb35bbf508db10954af07a9768", null ],
+    [ "dict_get_values", "dict_8h.html#a335932b9203c802312366d3c1444cf3f", null ],
+    [ "dict_insert", "dict_8h.html#a5afb5c3b7dca4ad31adfc6fd3003c405", null ],
+    [ "dict_resize", "dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a", null ]
 ];

@@ -1,6 +1,5 @@
 var dict__buckets__dtor_8c =
 [
-    [ "dict_bucket_dtor", "dict__buckets__dtor_8c.html#a8ad7b0cf98ec00acd53aba3211481cc4", null ],
-    [ "dict_bucket_dtor_with_entries", "dict__buckets__dtor_8c.html#a9526fb6fc778427949479f61b02abbe2", null ],
-    [ "dict_buckets_dtor", "dict__buckets__dtor_8c.html#a7dcdc971e03fd77b0a0584e9eda3c9e2", null ]
+    [ "dict_bucket_dtor", "dict__buckets__dtor_8c.html#add14402fbc68afc6e8a89e346a0042dd", null ],
+    [ "dict_buckets_dtor", "dict__buckets__dtor_8c.html#ac20f129d95f8bf5e1ec41b351d4e7046", null ]
 ];

@@ -168,11 +168,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">return</span> new_buckets;</div>
 <div class="line"><span class="lineno">   35</span>}</div>
 <div class="ttc" id="adict_8h_html_a524dc6d79f8e1df8fa88198549ccaacb"><div class="ttname"><a href="dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a></div><div class="ttdeci">int dict_buckets_ctor(bucket_t **buckets, uint64_t size)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor.c:11</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00108">dict.h:108</a></div></div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00083">dict_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00081">dict_resize()</a>.</p>
 
 </div>
 </div>
@@ -222,29 +222,26 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="dict__resize_8c_source.html#l00052">52</a> of file <a class="el" href="dict__resize_8c_source.html">dict_resize.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   54</span>{</div>
 <div class="line"><span class="lineno">   55</span>    uint32_t key_hash = 0;</div>
-<div class="line"><span class="lineno">   56</span>    <a class="code hl_struct" href="structs__entry.html">entry_t</a> *entry = NULL;</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *new_bucket = NULL;</div>
-<div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">while</span> (NULL != bucket &amp;&amp; NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a6ea4b24a5328f36fe0a52af70bcfdca0">entry</a>) {</div>
-<div class="line"><span class="lineno">   60</span>        entry = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a6ea4b24a5328f36fe0a52af70bcfdca0">entry</a>;</div>
-<div class="line"><span class="lineno">   61</span>        key_hash = <a class="code hl_function" href="murmurhash1_8h.html#a4579f11c4f71c58fe6b20b1357223d99">murmurhash1</a>(entry-&gt;<a class="code hl_variable" href="structs__entry.html#adc39874286e79b343fe7cf3331a02fa0">key</a>, strlen(entry-&gt;<a class="code hl_variable" href="structs__entry.html#adc39874286e79b343fe7cf3331a02fa0">key</a>), <a class="code hl_define" href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a>);</div>
-<div class="line"><span class="lineno">   62</span>        new_bucket = new_buckets[<a class="code hl_define" href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a>(key_hash, new_size)];</div>
-<div class="line"><span class="lineno">   63</span>        <a class="code hl_function" href="dict_8h.html#a0e8cbe3cd6223a6816ce82b8f8da0bf6">dict_bucket_insert</a>(&amp;new_bucket, entry);</div>
-<div class="line"><span class="lineno">   64</span>        bucket = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><span class="lineno">   65</span>    }</div>
-<div class="line"><span class="lineno">   66</span>}</div>
-<div class="ttc" id="adict_8h_html_a0e8cbe3cd6223a6816ce82b8f8da0bf6"><div class="ttname"><a href="dict_8h.html#a0e8cbe3cd6223a6816ce82b8f8da0bf6">dict_bucket_insert</a></div><div class="ttdeci">int dict_bucket_insert(bucket_t **bucket, entry_t *entry)</div><div class="ttdef"><b>Definition</b> <a href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert.c:11</a></div></div>
+<div class="line"><span class="lineno">   56</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **new_bucket = NULL;</div>
+<div class="line"><span class="lineno">   57</span> </div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">while</span> (NULL != bucket &amp;&amp; NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
+<div class="line"><span class="lineno">   59</span>        key_hash = <a class="code hl_function" href="murmurhash1_8h.html#a4579f11c4f71c58fe6b20b1357223d99">murmurhash1</a>(bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, strlen(bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>), <a class="code hl_define" href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a>);</div>
+<div class="line"><span class="lineno">   60</span>        new_bucket = &amp;(new_buckets[<a class="code hl_define" href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a>(key_hash, new_size)]);</div>
+<div class="line"><span class="lineno">   61</span>        <a class="code hl_function" href="dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6">dict_bucket_insert</a>(new_bucket, bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">value</a>);</div>
+<div class="line"><span class="lineno">   62</span>        bucket = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
+<div class="line"><span class="lineno">   63</span>    }</div>
+<div class="line"><span class="lineno">   64</span>}</div>
+<div class="ttc" id="adict_8h_html_a736cd20eaee3b5c4aefbc432731c11d6"><div class="ttname"><a href="dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6">dict_bucket_insert</a></div><div class="ttdeci">int dict_bucket_insert(bucket_t **bucket, char *key, void *value)</div><div class="ttdef"><b>Definition</b> <a href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert.c:11</a></div></div>
 <div class="ttc" id="adict_8h_html_ac2ece6a50bbf9fc78c0bb2f44a7761c4"><div class="ttname"><a href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a></div><div class="ttdeci">#define HASH_SEED</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00059">dict.h:59</a></div></div>
 <div class="ttc" id="adict_8h_html_af4e66decc8af7f74ae9eb17baa064382"><div class="ttname"><a href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a></div><div class="ttdeci">#define DICT_BUCKET_IDX(H, S)</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00068">dict.h:68</a></div></div>
 <div class="ttc" id="amurmurhash1_8h_html_a4579f11c4f71c58fe6b20b1357223d99"><div class="ttname"><a href="murmurhash1_8h.html#a4579f11c4f71c58fe6b20b1357223d99">murmurhash1</a></div><div class="ttdeci">uint32_t murmurhash1(const void *key, uint64_t length, uint32_t seed)</div><div class="ttdoc">Hashes the key into an unsigned 32 bits.</div><div class="ttdef"><b>Definition</b> <a href="murmurhash1_8c_source.html#l00028">murmurhash1.c:28</a></div></div>
-<div class="ttc" id="astructs__bucket_html_a6ea4b24a5328f36fe0a52af70bcfdca0"><div class="ttname"><a href="structs__bucket.html#a6ea4b24a5328f36fe0a52af70bcfdca0">s_bucket::entry</a></div><div class="ttdeci">entry_t * entry</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00110">dict.h:110</a></div></div>
-<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00113">dict.h:113</a></div></div>
-<div class="ttc" id="astructs__entry_html"><div class="ttname"><a href="structs__entry.html">s_entry</a></div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00074">dict.h:74</a></div></div>
-<div class="ttc" id="astructs__entry_html_adc39874286e79b343fe7cf3331a02fa0"><div class="ttname"><a href="structs__entry.html#adc39874286e79b343fe7cf3331a02fa0">s_entry::key</a></div><div class="ttdeci">const char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00076">dict.h:76</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00096">dict.h:96</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a21984e3cea02225302d8c517cf11fa4f"><div class="ttname"><a href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">s_bucket::value</a></div><div class="ttdeci">void * value</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00099">dict.h:99</a></div></div>
+<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00102">dict.h:102</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00068">DICT_BUCKET_IDX</a>, <a class="el" href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert()</a>, <a class="el" href="dict_8h_source.html#l00110">s_bucket::entry</a>, <a class="el" href="dict_8h_source.html#l00059">HASH_SEED</a>, <a class="el" href="dict_8h_source.html#l00076">s_entry::key</a>, <a class="el" href="murmurhash1_8c_source.html#l00028">murmurhash1()</a>, and <a class="el" href="dict_8h_source.html#l00113">s_bucket::next</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00068">DICT_BUCKET_IDX</a>, <a class="el" href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert()</a>, <a class="el" href="dict_8h_source.html#l00059">HASH_SEED</a>, <a class="el" href="dict_8h_source.html#l00096">s_bucket::key</a>, <a class="el" href="murmurhash1_8c_source.html#l00028">murmurhash1()</a>, <a class="el" href="dict_8h_source.html#l00102">s_bucket::next</a>, and <a class="el" href="dict_8h_source.html#l00099">s_bucket::value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00083">dict_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00081">dict_resize()</a>.</p>
 
 </div>
 </div>
@@ -263,33 +260,33 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="dict__resize_8c_source.html#l00083">83</a> of file <a class="el" href="dict__resize_8c_source.html">dict_resize.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>{</div>
-<div class="line"><span class="lineno">   85</span>    uint64_t index = 0;</div>
-<div class="line"><span class="lineno">   86</span>    uint64_t new_size = <a class="code hl_function" href="#ad05ff11923ca728722009408c25412ed">round_size</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a> * <a class="code hl_define" href="dict_8h.html#aa87ee90c1daf77654454f884e16fde66">DICT_RESIZE_FACTOR</a>);</div>
-<div class="line"><span class="lineno">   87</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **new_buckets = <a class="code hl_function" href="#abed2471fb85b615d5b59d885886fdbe9">compute_new_buckets</a>(new_size);</div>
-<div class="line"><span class="lineno">   88</span> </div>
-<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (NULL == new_buckets)</div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">for</span> (; index &lt; dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>; ++index)</div>
-<div class="line"><span class="lineno">   92</span>        <a class="code hl_function" href="#a37c2b8ca90988b91ddcc0554072d931f">dict_rehash_bucket</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[index], new_buckets, new_size);</div>
-<div class="line"><span class="lineno">   93</span>    <a class="code hl_function" href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>, 0, NULL);</div>
-<div class="line"><span class="lineno">   94</span>    free(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>);</div>
-<div class="line"><span class="lineno">   95</span>    dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a> = new_buckets;</div>
-<div class="line"><span class="lineno">   96</span>    dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a> = new_size;</div>
-<div class="line"><span class="lineno">   97</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   98</span>}</div>
-<div class="ttc" id="adict_8h_html_a6aaea45cf93cf1a98adefdda5dacd203"><div class="ttname"><a href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries, free_value_t free_value)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor.c:37</a></div></div>
+<p class="definition">Definition at line <a class="el" href="dict__resize_8c_source.html#l00081">81</a> of file <a class="el" href="dict__resize_8c_source.html">dict_resize.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>{</div>
+<div class="line"><span class="lineno">   83</span>    uint64_t index = 0;</div>
+<div class="line"><span class="lineno">   84</span>    uint64_t new_size = <a class="code hl_function" href="#ad05ff11923ca728722009408c25412ed">round_size</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a> * <a class="code hl_define" href="dict_8h.html#aa87ee90c1daf77654454f884e16fde66">DICT_RESIZE_FACTOR</a>);</div>
+<div class="line"><span class="lineno">   85</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **new_buckets = <a class="code hl_function" href="#abed2471fb85b615d5b59d885886fdbe9">compute_new_buckets</a>(new_size);</div>
+<div class="line"><span class="lineno">   86</span> </div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">if</span> (NULL == new_buckets)</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">for</span> (; index &lt; dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>; ++index)</div>
+<div class="line"><span class="lineno">   90</span>        <a class="code hl_function" href="#a37c2b8ca90988b91ddcc0554072d931f">dict_rehash_bucket</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[index], new_buckets, new_size);</div>
+<div class="line"><span class="lineno">   91</span>    <a class="code hl_function" href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>, NULL);</div>
+<div class="line"><span class="lineno">   92</span>    free(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>);</div>
+<div class="line"><span class="lineno">   93</span>    dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a> = new_buckets;</div>
+<div class="line"><span class="lineno">   94</span>    dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a> = new_size;</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   96</span>}</div>
 <div class="ttc" id="adict_8h_html_aa87ee90c1daf77654454f884e16fde66"><div class="ttname"><a href="dict_8h.html#aa87ee90c1daf77654454f884e16fde66">DICT_RESIZE_FACTOR</a></div><div class="ttdeci">#define DICT_RESIZE_FACTOR</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00035">dict.h:35</a></div></div>
+<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
 <div class="ttc" id="adict__resize_8c_html_a37c2b8ca90988b91ddcc0554072d931f"><div class="ttname"><a href="#a37c2b8ca90988b91ddcc0554072d931f">dict_rehash_bucket</a></div><div class="ttdeci">static void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets, uint64_t new_size)</div><div class="ttdoc">This function iterates over a non-empty bucket linked list. It looks for all it's entries,...</div><div class="ttdef"><b>Definition</b> <a href="dict__resize_8c_source.html#l00052">dict_resize.c:52</a></div></div>
 <div class="ttc" id="adict__resize_8c_html_abed2471fb85b615d5b59d885886fdbe9"><div class="ttname"><a href="#abed2471fb85b615d5b59d885886fdbe9">compute_new_buckets</a></div><div class="ttdeci">static bucket_t ** compute_new_buckets(uint64_t new_size)</div><div class="ttdoc">This function is reponsible for allocating a new linked list buckets array.</div><div class="ttdef"><b>Definition</b> <a href="dict__resize_8c_source.html#l00024">dict_resize.c:24</a></div></div>
-<div class="ttc" id="adict__resize_8c_html_ad05ff11923ca728722009408c25412ed"><div class="ttname"><a href="#ad05ff11923ca728722009408c25412ed">round_size</a></div><div class="ttdeci">static uint64_t round_size(uint64_t new_size)</div><div class="ttdef"><b>Definition</b> <a href="dict__resize_8c_source.html#l00072">dict_resize.c:72</a></div></div>
-<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00137">dict.h:137</a></div></div>
-<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00140">dict.h:140</a></div></div>
+<div class="ttc" id="adict__resize_8c_html_ad05ff11923ca728722009408c25412ed"><div class="ttname"><a href="#ad05ff11923ca728722009408c25412ed">round_size</a></div><div class="ttdeci">static uint64_t round_size(uint64_t new_size)</div><div class="ttdef"><b>Definition</b> <a href="dict__resize_8c_source.html#l00070">dict_resize.c:70</a></div></div>
+<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00196">dict.h:196</a></div></div>
+<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00199">dict.h:199</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00140">s_dict::buckets</a>, <a class="el" href="dict__resize_8c_source.html#l00024">compute_new_buckets()</a>, <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor()</a>, <a class="el" href="dict__resize_8c_source.html#l00052">dict_rehash_bucket()</a>, <a class="el" href="dict_8h_source.html#l00035">DICT_RESIZE_FACTOR</a>, <a class="el" href="dict__resize_8c_source.html#l00072">round_size()</a>, and <a class="el" href="dict_8h_source.html#l00137">s_dict::size</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00199">s_dict::buckets</a>, <a class="el" href="dict__resize_8c_source.html#l00024">compute_new_buckets()</a>, <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor()</a>, <a class="el" href="dict__resize_8c_source.html#l00052">dict_rehash_bucket()</a>, <a class="el" href="dict_8h_source.html#l00035">DICT_RESIZE_FACTOR</a>, <a class="el" href="dict__resize_8c_source.html#l00070">round_size()</a>, and <a class="el" href="dict_8h_source.html#l00196">s_dict::size</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__insert_8c_source.html#l00012">dict_insert()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__insert_8c_source.html#l00016">dict_insert()</a>.</p>
 
 </div>
 </div>
@@ -317,21 +314,21 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="">https://github.com/python/cpython/blob/main/Python/hashtable.c#L108</a></p>
 
-<p class="definition">Definition at line <a class="el" href="dict__resize_8c_source.html#l00072">72</a> of file <a class="el" href="dict__resize_8c_source.html">dict_resize.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>{</div>
-<div class="line"><span class="lineno">   74</span>    uint64_t i = 1;</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> (new_size &lt; <a class="code hl_define" href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a>)</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a>;</div>
-<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">while</span> (i &lt; new_size)</div>
-<div class="line"><span class="lineno">   79</span>        i &lt;&lt;= 1;</div>
-<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">return</span> i;</div>
-<div class="line"><span class="lineno">   81</span>}</div>
+<p class="definition">Definition at line <a class="el" href="dict__resize_8c_source.html#l00070">70</a> of file <a class="el" href="dict__resize_8c_source.html">dict_resize.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>{</div>
+<div class="line"><span class="lineno">   72</span>    uint64_t i = 1;</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">if</span> (new_size &lt; <a class="code hl_define" href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a>)</div>
+<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a>;</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">while</span> (i &lt; new_size)</div>
+<div class="line"><span class="lineno">   77</span>        i &lt;&lt;= 1;</div>
+<div class="line"><span class="lineno">   78</span>    <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">   79</span>}</div>
 <div class="ttc" id="adict_8h_html_a7c424d212d0a2f17f239794857e88e07"><div class="ttname"><a href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a></div><div class="ttdeci">#define DICT_MIN_SIZE</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00017">dict.h:17</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="dict_8h_source.html#l00017">DICT_MIN_SIZE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00083">dict_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00081">dict_resize()</a>.</p>
 
 </div>
 </div>

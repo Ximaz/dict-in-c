@@ -141,6 +141,23 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size,
 
 /**
  * @internal
+ * @file src/dict_bucket_has_key.c
+ * @brief Returns whether a key is present in the bucket.
+ *
+ * If a `NULL` pointer is passed for bucket, the function will crash.
+ *
+ * @note The key MUST NOT be `NULL` as it may return a falsy value. It's not
+ * the function's purpose to check for a `NULL` pointer key, so you better make
+ * sure it's not before calling it.
+ *
+ * @param bucket The bucket in which to look for the key.
+ * @param key The key to look for in the bucket.
+ * @return 1 if present, 0 if not present.
+ */
+int dict_bucket_has_key(const bucket_t *bucket, const char *key);
+
+/**
+ * @internal
  * @file src/dict_bucket_insert.c
  * @brief Inserts an entry into a dict bucket.
  *
@@ -235,6 +252,10 @@ void dict_dtor(dict_t *dict, free_pair_t free_pair);
  *
  * If a `NULL` pointer is passed, or if the dict has been deallocated, the
  * function will crash.
+ *
+ * @note The key MUST NOT be `NULL` as it may break other functions. It's not
+ * the function's purpose to check for a `NULL` pointer key, so you better make
+ * sure it's not before calling it.
  *
  * @param dict The dict in which to insert the entry.
  * @param key The key to refer to the value.

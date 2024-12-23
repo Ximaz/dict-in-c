@@ -111,25 +111,25 @@ $(function(){initNavTree('dict__dtor_8c.html',''); initResizable(true); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad35641192cf77a66618392fd111e3cf8" id="r_ad35641192cf77a66618392fd111e3cf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad35641192cf77a66618392fd111e3cf8">dict_dtor</a> (<a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict, <a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a> free_value)</td></tr>
-<tr class="separator:ad35641192cf77a66618392fd111e3cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab31bdadc44fa3d4dc062d85bbe274975" id="r_ab31bdadc44fa3d4dc062d85bbe274975"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab31bdadc44fa3d4dc062d85bbe274975">dict_dtor</a> (<a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict, <a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</td></tr>
+<tr class="separator:ab31bdadc44fa3d4dc062d85bbe274975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Deallocates the dict. </p>
-<p>The deallocator will only free the buckets array and the dict. It will not free the entries. The programmer is in charge of entries deallocation.</p>
+<p>The <code>free_pair</code> function will be in charge to free the key of the pair, if not constant, and the value, if not constant. If both are constant, you can pass a <code>NULL</code> pointer as nothing has to be free'd.</p>
 <p>If a <code>NULL</code> pointer is passed, or if the dict has already been deallocated, the function will crash.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dict</td><td>The dict's pointer to deallocate. </td></tr>
-    <tr><td class="paramname">free_value</td><td>The function to use to free entries value, may be <code>NULL</code>. </td></tr>
+    <tr><td class="paramname">free_pair</td><td>The function to use to free pair, may be <code>NULL</code>. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition in file <a class="el" href="dict__dtor_8c_source.html">dict_dtor.c</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad35641192cf77a66618392fd111e3cf8" name="ad35641192cf77a66618392fd111e3cf8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad35641192cf77a66618392fd111e3cf8">&#9670;&#160;</a></span>dict_dtor()</h2>
+<a id="ab31bdadc44fa3d4dc062d85bbe274975" name="ab31bdadc44fa3d4dc062d85bbe274975"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab31bdadc44fa3d4dc062d85bbe274975">&#9670;&#160;</a></span>dict_dtor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,22 +142,22 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="dict_8h.html#a28f43e58a18d3f30c7f4bf230c48915a">free_value_t</a></td>          <td class="paramname"><span class="paramname"><em>free_value</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></td>          <td class="paramname"><span class="paramname"><em>free_pair</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="dict__dtor_8c_source.html#l00011">11</a> of file <a class="el" href="dict__dtor_8c_source.html">dict_dtor.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>{</div>
-<div class="line"><span class="lineno">   13</span>    <a class="code hl_function" href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>, 1, free_value);</div>
+<div class="line"><span class="lineno">   13</span>    <a class="code hl_function" href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>, free_pair);</div>
 <div class="line"><span class="lineno">   14</span>    free(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>);</div>
 <div class="line"><span class="lineno">   15</span>    free(dict);</div>
 <div class="line"><span class="lineno">   16</span>}</div>
-<div class="ttc" id="adict_8h_html_a6aaea45cf93cf1a98adefdda5dacd203"><div class="ttname"><a href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries, free_value_t free_value)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor.c:37</a></div></div>
-<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00137">dict.h:137</a></div></div>
-<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00140">dict.h:140</a></div></div>
+<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
+<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00196">dict.h:196</a></div></div>
+<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00199">dict.h:199</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00140">s_dict::buckets</a>, <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor()</a>, and <a class="el" href="dict_8h_source.html#l00137">s_dict::size</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00199">s_dict::buckets</a>, <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor()</a>, and <a class="el" href="dict_8h_source.html#l00196">s_dict::size</a>.</p>
 
 </div>
 </div>

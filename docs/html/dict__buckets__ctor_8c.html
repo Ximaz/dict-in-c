@@ -138,16 +138,16 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   15</span>    <span class="keywordflow">for</span> (; index &lt; size; ++index) {</div>
 <div class="line"><span class="lineno">   16</span>        buckets[index] = (<a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *) calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structs__bucket.html">bucket_t</a>));</div>
 <div class="line"><span class="lineno">   17</span>        <span class="keywordflow">if</span> (NULL == buckets[index]) {</div>
-<div class="line"><span class="lineno">   18</span>            <a class="code hl_function" href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a>(buckets, index, 0, NULL);</div>
+<div class="line"><span class="lineno">   18</span>            <a class="code hl_function" href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(buckets, index, NULL);</div>
 <div class="line"><span class="lineno">   19</span>            <span class="keywordflow">return</span> -1;</div>
 <div class="line"><span class="lineno">   20</span>        }</div>
 <div class="line"><span class="lineno">   21</span>    }</div>
 <div class="line"><span class="lineno">   22</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">   23</span>}</div>
-<div class="ttc" id="adict_8h_html_a6aaea45cf93cf1a98adefdda5dacd203"><div class="ttname"><a href="dict_8h.html#a6aaea45cf93cf1a98adefdda5dacd203">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, int free_entries, free_value_t free_value)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor.c:37</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00108">dict.h:108</a></div></div>
+<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict__buckets__dtor_8c_source.html#l00037">dict_buckets_dtor()</a>.</p>
+<p class="reference">References <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="dict__resize_8c_source.html#l00024">compute_new_buckets()</a>, and <a class="el" href="dict__ctor_8c_source.html#l00011">dict_ctor()</a>.</p>
 

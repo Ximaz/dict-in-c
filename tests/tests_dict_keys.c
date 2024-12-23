@@ -5,7 +5,6 @@
 ** Unit tests for the dict keys allocation and deallocation.
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <criterion/criterion.h>

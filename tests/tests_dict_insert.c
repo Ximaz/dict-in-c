@@ -5,7 +5,6 @@
 ** Unit tests for the dict insert function.
 */
 
-#include <stdio.h>
 #include <criterion/criterion.h>
 #include <criterion/new/assert.h>
 #include "dict.h"

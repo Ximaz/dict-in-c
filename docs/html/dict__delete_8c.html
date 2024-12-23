@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Dict in C: src/dict_insert.c File Reference</title>
+<title>Dict in C: src/dict_delete.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('dict__insert_8c.html',''); initResizable(true); });
+$(function(){initNavTree('dict__delete_8c.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,30 +98,30 @@ $(function(){initNavTree('dict__insert_8c.html',''); initResizable(true); });
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">dict_insert.c File Reference</div></div>
+  <div class="headertitle"><div class="title">dict_delete.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="murmurhash1_8h_source.html">murmurhash1.h</a>&quot;</code><br />
 </div>
-<p><a href="dict__insert_8c_source.html">Go to the source code of this file.</a></p>
+<p><a href="dict__delete_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5afb5c3b7dca4ad31adfc6fd3003c405" id="r_a5afb5c3b7dca4ad31adfc6fd3003c405"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5afb5c3b7dca4ad31adfc6fd3003c405">dict_insert</a> (<a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict, char *key, uint64_t key_length, void *value)</td></tr>
-<tr class="memdesc:a5afb5c3b7dca4ad31adfc6fd3003c405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an entry into the dict.  <br /></td></tr>
-<tr class="separator:a5afb5c3b7dca4ad31adfc6fd3003c405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9b484a95624f0a02670ad22e3f6f31" id="r_aca9b484a95624f0a02670ad22e3f6f31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca9b484a95624f0a02670ad22e3f6f31">dict_delete</a> (<a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *dict, char *key, uint64_t key_length, <a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</td></tr>
+<tr class="memdesc:aca9b484a95624f0a02670ad22e3f6f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes an entry from the dict.  <br /></td></tr>
+<tr class="separator:aca9b484a95624f0a02670ad22e3f6f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a5afb5c3b7dca4ad31adfc6fd3003c405" name="a5afb5c3b7dca4ad31adfc6fd3003c405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5afb5c3b7dca4ad31adfc6fd3003c405">&#9670;&#160;</a></span>dict_insert()</h2>
+<a id="aca9b484a95624f0a02670ad22e3f6f31" name="aca9b484a95624f0a02670ad22e3f6f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9b484a95624f0a02670ad22e3f6f31">&#9670;&#160;</a></span>dict_delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int dict_insert </td>
+          <td class="memname">int dict_delete </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *</td>          <td class="paramname"><span class="paramname"><em>dict</em></span>, </td>
         </tr>
@@ -138,44 +138,44 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></td>          <td class="paramname"><span class="paramname"><em>free_pair</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Insert an entry into the dict. </p>
-<p>The function allocates a new entry. If it was able to allocate AND insert the entry, the function returns 0. If either one failed, it will return -1 and the dict is left unchanged.</p>
-<dl class="section warning"><dt>Warning</dt><dd>If a <code>NULL</code> pointer is passed, or if the dict has been deallocated, the function will crash.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>If the key is <code>NULL</code> some functions may break. Make sure it's not before calling the function.</dd></dl>
+<p>Deletes an entry from the dict. </p>
+<p>The function tries to delete an entry based on the given key. If the key was not found, the function returns -1 as an error. If the entry is found, it's key and value are given as parameter of the <code>free_pair</code> function to let the programmer handle the memory release, if needed.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If <code>dict</code> or <code>key</code> is a <code>NULL</code> pointer, the function will crash.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The key is not marked as const as it may get free'd by the <code>free_pair</code> function, but bear in mind the current function will not modify the key.</dd>
+<dd>
+If the <code>free_pair</code> function is a <code>NULL</code> pointer, it's not called. It may be useful if neither the key nor the value were allocated.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dict</td><td>The dict in which to insert the entry. </td></tr>
-    <tr><td class="paramname">key</td><td>The key to refer to the value. </td></tr>
-    <tr><td class="paramname">key_length</td><td>The length of the key. </td></tr>
-    <tr><td class="paramname">value</td><td>The value refered at via the key. </td></tr>
+    <tr><td class="paramname">dict</td><td>The dict from which the pair must be deleted. </td></tr>
+    <tr><td class="paramname">key</td><td>The key referring to the pair which must be deleted. </td></tr>
+    <tr><td class="paramname">key_length</td><td>The length of the key. If unknowned, use <code>strlen(key)</code>. </td></tr>
+    <tr><td class="paramname">free_pair</td><td>The function called to release key and value memory. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="dict__insert_8c_source.html#l00012">12</a> of file <a class="el" href="dict__insert_8c_source.html">dict_insert.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
-<div class="line"><span class="lineno">   14</span>    uint32_t key_hash = 0;</div>
-<div class="line"><span class="lineno">   15</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **bucket_addr = NULL;</div>
-<div class="line"><span class="lineno">   16</span> </div>
-<div class="line"><span class="lineno">   17</span>    <span class="keywordflow">if</span> (<a class="code hl_define" href="dict_8h.html#a93bb42c03acbeb39278700e9f668dbdb">DICT_MUST_GROW</a>(dict) &amp;&amp; -1 == <a class="code hl_function" href="dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a">dict_resize</a>(dict))</div>
-<div class="line"><span class="lineno">   18</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   19</span>    key_hash = <a class="code hl_function" href="murmurhash1_8h.html#a4579f11c4f71c58fe6b20b1357223d99">murmurhash1</a>(key, key_length, <a class="code hl_define" href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a>);</div>
-<div class="line"><span class="lineno">   20</span>    bucket_addr = &amp;(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[<a class="code hl_define" href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a>(key_hash, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>)]);</div>
-<div class="line"><span class="lineno">   21</span>    <span class="keywordflow">if</span> (1 == <a class="code hl_function" href="dict_8h.html#ab8dfdef434b70705a9802cf6a8fc7c09">dict_bucket_has_key</a>(*bucket_addr, key) || \</div>
-<div class="line"><span class="lineno">   22</span>        -1 == <a class="code hl_function" href="dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6">dict_bucket_insert</a>(bucket_addr, key, value))</div>
+<p class="definition">Definition at line <a class="el" href="dict__delete_8c_source.html#l00012">12</a> of file <a class="el" href="dict__delete_8c_source.html">dict_delete.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>{</div>
+<div class="line"><span class="lineno">   15</span>    uint32_t key_hash = 0;</div>
+<div class="line"><span class="lineno">   16</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **bucket_addr = NULL;</div>
+<div class="line"><span class="lineno">   17</span> </div>
+<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> (<a class="code hl_define" href="dict_8h.html#a593599c585d7adacb119627085a4e25f">DICT_MUST_SHRINK</a>(dict) &amp;&amp; -1 == <a class="code hl_function" href="dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a">dict_resize</a>(dict))</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   20</span>    key_hash = <a class="code hl_function" href="murmurhash1_8h.html#a4579f11c4f71c58fe6b20b1357223d99">murmurhash1</a>(key, key_length, <a class="code hl_define" href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a>);</div>
+<div class="line"><span class="lineno">   21</span>    bucket_addr = &amp;(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>[<a class="code hl_define" href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a>(key_hash, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>)]);</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordflow">if</span> (-1 == <a class="code hl_function" href="dict_8h.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a>(bucket_addr, key, free_pair))</div>
 <div class="line"><span class="lineno">   23</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   24</span>    ++dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>;</div>
+<div class="line"><span class="lineno">   24</span>    --dict-&gt;<a class="code hl_variable" href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">items</a>;</div>
 <div class="line"><span class="lineno">   25</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">   26</span>}</div>
-<div class="ttc" id="adict_8h_html_a736cd20eaee3b5c4aefbc432731c11d6"><div class="ttname"><a href="dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6">dict_bucket_insert</a></div><div class="ttdeci">int dict_bucket_insert(bucket_t **bucket, char *key, void *value)</div><div class="ttdoc">Inserts an entry into a dict bucket.</div><div class="ttdef"><b>Definition</b> <a href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert.c:11</a></div></div>
-<div class="ttc" id="adict_8h_html_a93bb42c03acbeb39278700e9f668dbdb"><div class="ttname"><a href="dict_8h.html#a93bb42c03acbeb39278700e9f668dbdb">DICT_MUST_GROW</a></div><div class="ttdeci">#define DICT_MUST_GROW(D)</div><div class="ttdoc">Returns whether the dict must grow to accept new entries.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00044">dict.h:44</a></div></div>
-<div class="ttc" id="adict_8h_html_ab8dfdef434b70705a9802cf6a8fc7c09"><div class="ttname"><a href="dict_8h.html#ab8dfdef434b70705a9802cf6a8fc7c09">dict_bucket_has_key</a></div><div class="ttdeci">int dict_bucket_has_key(const bucket_t *bucket, const char *key)</div><div class="ttdoc">Returns whether a key is present in the bucket.</div><div class="ttdef"><b>Definition</b> <a href="dict__bucket__has__key_8c_source.html#l00010">dict_bucket_has_key.c:10</a></div></div>
+<div class="ttc" id="adict_8h_html_a593599c585d7adacb119627085a4e25f"><div class="ttname"><a href="dict_8h.html#a593599c585d7adacb119627085a4e25f">DICT_MUST_SHRINK</a></div><div class="ttdeci">#define DICT_MUST_SHRINK(D)</div><div class="ttdoc">Returns whether the dict must shirnk to save some memory upon entry removal.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00053">dict.h:53</a></div></div>
+<div class="ttc" id="adict_8h_html_a8bc7d4b7860ccc213d88bdb7f7a43335"><div class="ttname"><a href="dict_8h.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a></div><div class="ttdeci">int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair)</div><div class="ttdoc">Deletes an entry from the bucket based on the key.</div><div class="ttdef"><b>Definition</b> <a href="dict__bucket__delete_8c_source.html#l00047">dict_bucket_delete.c:47</a></div></div>
 <div class="ttc" id="adict_8h_html_ac1041229270e0b557cd6eb6f7b4efb3a"><div class="ttname"><a href="dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a">dict_resize</a></div><div class="ttdeci">int dict_resize(dict_t *dict)</div><div class="ttdoc">Resizes the dict.</div><div class="ttdef"><b>Definition</b> <a href="dict__resize_8c_source.html#l00085">dict_resize.c:85</a></div></div>
 <div class="ttc" id="adict_8h_html_ac2ece6a50bbf9fc78c0bb2f44a7761c4"><div class="ttname"><a href="dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4">HASH_SEED</a></div><div class="ttdeci">#define HASH_SEED</div><div class="ttdoc">The hash seed to use. Mostly for security, but it has to be the same all across the project.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00060">dict.h:60</a></div></div>
 <div class="ttc" id="adict_8h_html_af4e66decc8af7f74ae9eb17baa064382"><div class="ttname"><a href="dict_8h.html#af4e66decc8af7f74ae9eb17baa064382">DICT_BUCKET_IDX</a></div><div class="ttdeci">#define DICT_BUCKET_IDX(H, S)</div><div class="ttdoc">Returns the index to the bucket in which to store the entry.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00069">dict.h:69</a></div></div>
@@ -185,7 +185,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00230">dict.h:230</a></div></div>
 <div class="ttc" id="astructs__dict_html_a70b91e54a49a08e0d06539a06c665f89"><div class="ttname"><a href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">s_dict::items</a></div><div class="ttdeci">uint64_t items</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00224">dict.h:224</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00230">s_dict::buckets</a>, <a class="el" href="dict__bucket__has__key_8c_source.html#l00010">dict_bucket_has_key()</a>, <a class="el" href="dict_8h_source.html#l00069">DICT_BUCKET_IDX</a>, <a class="el" href="dict__bucket__insert_8c_source.html#l00011">dict_bucket_insert()</a>, <a class="el" href="dict_8h_source.html#l00044">DICT_MUST_GROW</a>, <a class="el" href="dict__resize_8c_source.html#l00085">dict_resize()</a>, <a class="el" href="dict_8h_source.html#l00060">HASH_SEED</a>, <a class="el" href="dict_8h_source.html#l00224">s_dict::items</a>, <a class="el" href="murmurhash1_8c_source.html#l00028">murmurhash1()</a>, and <a class="el" href="dict_8h_source.html#l00227">s_dict::size</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00230">s_dict::buckets</a>, <a class="el" href="dict__bucket__delete_8c_source.html#l00047">dict_bucket_delete()</a>, <a class="el" href="dict_8h_source.html#l00069">DICT_BUCKET_IDX</a>, <a class="el" href="dict_8h_source.html#l00053">DICT_MUST_SHRINK</a>, <a class="el" href="dict__resize_8c_source.html#l00085">dict_resize()</a>, <a class="el" href="dict_8h_source.html#l00060">HASH_SEED</a>, <a class="el" href="dict_8h_source.html#l00224">s_dict::items</a>, <a class="el" href="murmurhash1_8c_source.html#l00028">murmurhash1()</a>, and <a class="el" href="dict_8h_source.html#l00227">s_dict::size</a>.</p>
 
 </div>
 </div>
@@ -194,7 +194,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dict__insert_8c.html">dict_insert.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dict__delete_8c.html">dict_delete.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

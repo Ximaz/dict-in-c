@@ -9,6 +9,7 @@
 #define __DICT_H_
 
 #include <stdint.h>
+#include <string.h>
 
 /**
  * @internal
@@ -66,6 +67,15 @@
  * @param S The size of the buckets array.
  */
 #define DICT_BUCKET_IDX(H, S) (H) % (S)
+
+/**
+ * @internal
+ * @brief Returns whether two keys from a dict are matching.
+ *
+ * @param K1 The first key to compare.
+ * @param K2 The second key to compare.
+ */
+#define DICT_KEY_MATCH(K1, K2) (0 == strcmp((K1), (K2)))
 
 /**
  * @brief Such function prototype represents the function to use to release the
@@ -157,6 +167,28 @@ int dict_bucket_has_key(const bucket_t *bucket, const char *key);
 int dict_bucket_insert(bucket_t **bucket, char *key, void *value);
 
 /**
+ * @brief Deletes an entry from the bucket based on the key.
+ *
+ * If no node matched the key, -1 is returned as an error and the bucket is
+ * unchanged.
+ *
+ * @warning If a `NULL` pointer is passed for either the bucket or the key, the
+ * function will crash.
+ *
+ * @note The key is not marked as const as it may get free'd by the `free_pair`
+ * function, but bear in mind the current function will not modify the key.
+ *
+ * @note If the `free_pair` function is a `NULL` pointer, it's not called. It
+ * may be useful if neither the key nor the value were allocated.
+ *
+ * @param bucket The bucket from which to remove the entry.
+ * @param key The key used to match the entry to be removed.
+ * @param free_pair The function called to release the key and value memory.
+ * @return 0 on success, -1 on error.
+ */
+int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair);
+
+/**
  * @internal
  * @brief This function prints the content of each linked list bucket from the
  * buckets array.
@@ -242,6 +274,31 @@ void dict_dtor(dict_t *dict, free_pair_t free_pair);
  * @return 0 on success, -1 on error.
  */
 int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
+
+/**
+ * @brief Deletes an entry from the dict.
+ *
+ * The function tries to delete an entry based on the given key. If the key was
+ * not found, the function returns -1 as an error. If the entry is found, it's
+ * key and value are given as parameter of the `free_pair` function to let the
+ * programmer handle the memory release, if needed.
+ *
+ * @warning If `dict` or `key` is a `NULL` pointer, the function will crash.
+ *
+ * @note The key is not marked as const as it may get free'd by the `free_pair`
+ * function, but bear in mind the current function will not modify the key.
+ *
+ * @note If the `free_pair` function is a `NULL` pointer, it's not called. It
+ * may be useful if neither the key nor the value were allocated.
+ *
+ * @param dict The dict from which the pair must be deleted.
+ * @param key The key referring to the pair which must be deleted.
+ * @param key_length The length of the key. If unknowned, use `strlen(key)`.
+ * @param free_pair The function called to release key and value memory.
+ * @return 0 on success, -1 on error.
+ */
+int dict_delete(dict_t *dict, char *key, uint64_t key_length,
+    free_pair_t free_pair);
 
 /**
  * @internal

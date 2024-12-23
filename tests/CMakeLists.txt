@@ -22,6 +22,7 @@ add_executable(unit_tests
   "tests_dict_insert.c"
   "tests_dict_keys.c"
   "tests_dict_values.c"
+  "tests_dict_delete.c"
 )
 
 target_include_directories(unit_tests PRIVATE ${CRITERION_INCLUDE_DIR})

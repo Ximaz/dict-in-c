@@ -2,7 +2,7 @@
 ** XIMAZ PROJECTS, 2024
 ** dict_insert.c
 ** File description:
-** Exposes a function to insert an entry into a dict.
+** Exposes a function to insert an entry into a dict bucket.
 */
 
 #include <stdlib.h>

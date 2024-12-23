@@ -25,6 +25,7 @@ void print_bucket(const bucket_t *bucket, uint64_t index)
         fprintf(stderr, "- [%llu] = %s\n", node_index, bucket->key);
 #endif
         bucket = bucket->next;
+        ++node_index;
     }
 }
 

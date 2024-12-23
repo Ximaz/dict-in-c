@@ -73,6 +73,7 @@ target_sources(
   "src/dict_buckets_dtor.c"
   "src/dict_buckets_debug.c"
   "src/dict_bucket_insert.c"
+  "src/dict_bucket_delete.c"
   "src/dict_bucket_has_key.c"
   "src/dict_insert.c"
   "src/dict_resize.c"
@@ -80,6 +81,7 @@ target_sources(
   "src/dict_free_keys.c"
   "src/dict_get_values.c"
   "src/dict_free_values.c"
+  "src/dict_delete.c"
 )
 target_compile_options(dict PRIVATE ${MY_CFLAGS})
 

@@ -5,7 +5,6 @@
 ** Exposes a function to delete an entry from a dict bucket.
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "dict.h"
 
@@ -34,7 +33,6 @@ int dict_bucket_delete_until(bucket_t *node, char *key, free_pair_t free_pair)
             node = node->next;
             continue;
         }
-        dprintf(2, "Prev K : %s | Node K : %s | Next K : %s\n", prev->key, node->key, node->next->key);
         prev->next = node->next;
         if (NULL != free_pair)
             free_pair(node->key, node->value);

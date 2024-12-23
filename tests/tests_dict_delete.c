@@ -44,9 +44,7 @@ Test(dict_delete, delete_from_unknown_position)
     for (; index < 6; ++index)
         cr_expect(eq(int, 0, dict_insert(dict, KEYS[index], 4,
             (void *) my_value)));
-    dict_buckets_debug(dict->buckets, dict->size);
     dict_delete(dict, "KEY8", 4, fake_delete_key);
-    dict_buckets_debug(dict->buckets, dict->size);
     dict_keys = dict_get_keys(dict);
     dict_dtor(dict, fake_delete_key);
 

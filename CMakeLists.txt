@@ -75,6 +75,8 @@ target_sources(
   "src/dict_bucket_insert.c"
   "src/dict_insert.c"
   "src/dict_resize.c"
+  "src/dict_get_keys.c"
+  "src/dict_free_keys.c"
 )
 target_compile_options(dict PRIVATE ${MY_CFLAGS})
 

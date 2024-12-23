@@ -9,6 +9,10 @@
 #include "dict.h"
 #include "murmurhash1.h"
 
+/**
+ * TODO: Return an error if the key is already set in the dict. C.f. the note
+ * on the free_pair_t function typedef.
+ */
 int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value)
 {
     uint32_t key_hash = 0;

@@ -20,6 +20,7 @@ add_executable(unit_tests
   tests_hash.c
   tests_dict_memory.c
   tests_dict_insert.c
+  tests_dict_keys.c
 )
 
 target_include_directories(unit_tests PRIVATE ${CRITERION_INCLUDE_DIR})

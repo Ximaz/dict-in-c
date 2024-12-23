@@ -72,6 +72,18 @@
  * memory allcoated to an entry value. If the value was not allocated (e.g. the
  * value is an integer), then you may use a NULL pointer instead to indicate
  * that the value has not to be free.
+ *
+ * @note There may be an upgrade in the future where either key or value may
+ * be `NULL` pointers when calling. For instace, if the programmer tries to
+ * insert different values with the same key, during the second insertion, the
+ * value already in the dict will have to be deallocated, but not the key
+ * itself. Now that I think about it, I wonder what would happen if one sets an
+ * allocated key and then tries to insert the key with another allocated key
+ * containing the same value, or worse, a stack-allocated key, which can't be
+ * free then, as it would cause a bad free. The solution may be to return an
+ * error when one tries to insert a key which already is set in the dict. They
+ * will be in charge of removing it first, then inserting it with it's new
+ * value.
  */
 typedef void (*free_pair_t)(char *key, void *value);
 
@@ -188,34 +200,6 @@ typedef struct s_dict {
 } dict_t;
 
 /**
- * @brief This structure represents the keys of the dict. It will be computed
- * each time the dict_keys() function is called. It will not be used by other
- * function to operate on the dict, as the internal dict state is known by all
- * functions.
- */
-typedef struct s_dict_keys {
-    /** Number of keys. Same value as the 'items' dict_t member. */
-    uint64_t size;
-
-    /** The keys in a string array of length 'size'.  */
-    const char **keys;
-} dict_keys_t;
-
-/**
- * @brief This structure represents the values of the dict. It will be computed
- * each time the dict_values() function is called. It will not be used by other
- * function to operate on the dict, as the internal dict state is known by all
- * functions.
- */
-typedef struct s_dict_values {
-    /** Number of values. Same value as the 'items' dict_t member. */
-    uint64_t size;
-
-    /** The values in a string array of length 'size'.  */
-    const void **values;
-} dict_values_t;
-
-/**
  * @file src/dict_ctor.c
  * @brief Allocates a new dict.
  *
@@ -229,8 +213,9 @@ dict_t *dict_ctor(void);
  * @file src/dict_dtor.c
  * @brief Deallocates the dict.
  *
- * The deallocator will only free the buckets array and the dict. It will not
- * free the entries. The programmer is in charge of entries deallocation.
+ * The `free_pair` function will be in charge to free the key of the pair, if
+ * not constant, and the value, if not constant. If both are constant, you can
+ * pass a `NULL` pointer as nothing has to be free'd.
  *
  * If a `NULL` pointer is passed, or if the dict has already been deallocated,
  * the function will crash.
@@ -289,5 +274,68 @@ int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
  * @return 0 on success, -1 on error.
  */
 int dict_resize(dict_t *dict);
+
+/**
+ * @brief This structure represents the keys of the dict. It will be computed
+ * each time the dict_keys() function is called. It will not be used by other
+ * function to operate on the dict, as the internal dict state is known by all
+ * functions.
+ */
+typedef struct s_dict_keys {
+    /** Number of keys. Same value as the 'items' dict_t member. */
+    uint64_t size;
+
+    /** The keys in a string array of length 'size'.  */
+    const char **keys;
+} dict_keys_t;
+
+/**
+ * @file src/dict_get_keys.c
+ * @brief Returns the list of the keys of the dict.
+ *
+ * If an error occured during the dict_keys_t object allocation, `NULL` pointer
+ * is returned.
+ *
+ * The `dict_keys_t` object will have to be free using the `dict_free_keys`
+ * function.
+ *
+ * If a `NULL` pointer is passed, or if the dict has already been deallocated,
+ * the function will crash.
+ *
+ * @note The list of keys is not ordered. The keys are taken from each bucket
+ * from 0 to the size of the dict, and each of the bucket is iterated over from
+ * head to tail (linked list). Knowing that the insertion depends on a hash, we
+ * don't know the order in which the keys will appear in the list.
+ *
+ * @param dict The dict from which to get the keys.
+ * @return The list of keys.
+ */
+dict_keys_t *dict_get_keys(const dict_t *dict);
+
+/**
+ * @file src/dict_free_keys.c
+ * @brief Release memory from `dict_get_keys` allocations.
+ *
+ * If a `NULL` pointer is passed, or if the dict keys have already been
+ * deallocated, the function will crash.
+ *
+ * @param dict_keys The keys to free. (output of `dict_get_keys` function)
+ */
+void dict_free_keys(dict_keys_t *dict_keys);
+
+/**
+ * @brief This structure represents the values of the dict. It will be computed
+ * each time the dict_values() function is called. It will not be used by other
+ * function to operate on the dict, as the internal dict state is known by all
+ * functions.
+ */
+typedef struct s_dict_values {
+    /** Number of values. Same value as the 'items' dict_t member. */
+    uint64_t size;
+
+    /** The values in a string array of length 'size'.  */
+    const void **values;
+} dict_values_t;
+
 
 #endif /* !__DICT_H_ */

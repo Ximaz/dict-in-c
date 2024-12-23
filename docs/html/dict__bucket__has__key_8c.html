@@ -109,6 +109,7 @@ $(function(){initNavTree('dict__bucket__has__key_8c.html',''); initResizable(tru
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ab8dfdef434b70705a9802cf6a8fc7c09" id="r_ab8dfdef434b70705a9802cf6a8fc7c09"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8dfdef434b70705a9802cf6a8fc7c09">dict_bucket_has_key</a> (const <a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> *bucket, const char *key)</td></tr>
+<tr class="memdesc:ab8dfdef434b70705a9802cf6a8fc7c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether a key is present in the bucket.  <br /></td></tr>
 <tr class="separator:ab8dfdef434b70705a9802cf6a8fc7c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -131,6 +132,18 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns whether a key is present in the bucket. </p>
+<dl class="section warning"><dt>Warning</dt><dd>If a <code>NULL</code> pointer is passed for bucket, the function will crash.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the key is <code>NULL</code> a falsy value may be returned. Make sure it's not before calling the function.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bucket</td><td>The bucket in which to look for the key. </td></tr>
+    <tr><td class="paramname">key</td><td>The key to look for in the bucket. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if present, 0 if not present. </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="dict__bucket__has__key_8c_source.html#l00011">11</a> of file <a class="el" href="dict__bucket__has__key_8c_source.html">dict_bucket_has_key.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>{</div>
 <div class="line"><span class="lineno">   13</span>    <span class="keywordflow">while</span> (NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
@@ -140,10 +153,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   17</span>    }</div>
 <div class="line"><span class="lineno">   18</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">   19</span>}</div>
-<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00096">dict.h:96</a></div></div>
-<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00102">dict.h:102</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00084">dict.h:84</a></div></div>
+<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00090">dict.h:90</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00096">s_bucket::key</a>, and <a class="el" href="dict_8h_source.html#l00102">s_bucket::next</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00084">s_bucket::key</a>, and <a class="el" href="dict_8h_source.html#l00090">s_bucket::next</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="dict__insert_8c_source.html#l00012">dict_insert()</a>.</p>
 

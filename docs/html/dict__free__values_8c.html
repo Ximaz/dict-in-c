@@ -101,9 +101,6 @@ $(function(){initNavTree('dict__free__values_8c.html',''); initResizable(true); 
   <div class="headertitle"><div class="title">dict_free_values.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Release memory from <code>dict_get_values</code> allocations.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br />
 </div>
@@ -112,20 +109,10 @@ $(function(){initNavTree('dict__free__values_8c.html',''); initResizable(true); 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a66becdbd651b0382712e8d7ed0cd22ce" id="r_a66becdbd651b0382712e8d7ed0cd22ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66becdbd651b0382712e8d7ed0cd22ce">dict_free_values</a> (<a class="el" href="dict_8h.html#aff87357254fc41160f05530cf9e49942">dict_values_t</a> *dict_values)</td></tr>
+<tr class="memdesc:a66becdbd651b0382712e8d7ed0cd22ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release memory from <code>dict_get_values</code> allocations.  <br /></td></tr>
 <tr class="separator:a66becdbd651b0382712e8d7ed0cd22ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Release memory from <code>dict_get_values</code> allocations. </p>
-<p>If a <code>NULL</code> pointer is passed, or if the dict values have already been deallocated, the function will crash.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dict_values</td><td>The values to free. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition in file <a class="el" href="dict__free__values_8c_source.html">dict_free_values.c</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a66becdbd651b0382712e8d7ed0cd22ce" name="a66becdbd651b0382712e8d7ed0cd22ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66becdbd651b0382712e8d7ed0cd22ce">&#9670;&#160;</a></span>dict_free_values()</h2>
 
@@ -141,14 +128,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Release memory from <code>dict_get_values</code> allocations. </p>
+<p>If a <code>NULL</code> pointer is passed, or if the dict values have already been deallocated, the function will crash.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dict_values</td><td>The values to free. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="dict__free__values_8c_source.html#l00012">12</a> of file <a class="el" href="dict__free__values_8c_source.html">dict_free_values.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
 <div class="line"><span class="lineno">   14</span>    free(dict_values-&gt;<a class="code hl_variable" href="structs__dict__values.html#a698037e6478799f847a0fcd91ff0be43">values</a>);</div>
 <div class="line"><span class="lineno">   15</span>    free(dict_values);</div>
 <div class="line"><span class="lineno">   16</span>}</div>
-<div class="ttc" id="astructs__dict__values_html_a698037e6478799f847a0fcd91ff0be43"><div class="ttname"><a href="structs__dict__values.html#a698037e6478799f847a0fcd91ff0be43">s_dict_values::values</a></div><div class="ttdeci">const void ** values</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00370">dict.h:370</a></div></div>
+<div class="ttc" id="astructs__dict__values_html_a698037e6478799f847a0fcd91ff0be43"><div class="ttname"><a href="structs__dict__values.html#a698037e6478799f847a0fcd91ff0be43">s_dict_values::values</a></div><div class="ttdeci">const void ** values</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00345">dict.h:345</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00370">s_dict_values::values</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00345">s_dict_values::values</a>.</p>
 
 </div>
 </div>

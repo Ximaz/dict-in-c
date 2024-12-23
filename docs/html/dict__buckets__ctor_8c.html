@@ -109,6 +109,7 @@ $(function(){initNavTree('dict__buckets__ctor_8c.html',''); initResizable(true);
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a524dc6d79f8e1df8fa88198549ccaacb" id="r_a524dc6d79f8e1df8fa88198549ccaacb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a> (<a class="el" href="dict_8h.html#a85d9af0f9d956615cd6d9919074bb939">bucket_t</a> **buckets, uint64_t size)</td></tr>
+<tr class="memdesc:a524dc6d79f8e1df8fa88198549ccaacb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates new buckets linked list inside the array.  <br /></td></tr>
 <tr class="separator:a524dc6d79f8e1df8fa88198549ccaacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -131,6 +132,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Allocates new buckets linked list inside the array. </p>
+<p>If it failed to allocate one bucket, it free all the previously allocated ones before returning -1.</p>
+<p>If existing buckets are already allocated inside the array, they will not be free by this function. The programmer will have to free them first, even though the purpose of this function is to allocate buckets of a new buckets array that has just been allocated.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If the buckets array is a <code>NULL</code> pointer, the function will crash.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buckets</td><td>The pre-allocated buckets array. </td></tr>
+    <tr><td class="paramname">size</td><td>The number of buckets to allocate inside the buckets array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error. </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">11</a> of file <a class="el" href="dict__buckets__ctor_8c_source.html">dict_buckets_ctor.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>{</div>
 <div class="line"><span class="lineno">   13</span>    uint64_t index = 0;</div>
@@ -144,8 +158,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   21</span>    }</div>
 <div class="line"><span class="lineno">   22</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">   23</span>}</div>
-<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
+<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdoc">Deallocates buckets linked list from the array.</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00082">dict.h:82</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor()</a>.</p>
 

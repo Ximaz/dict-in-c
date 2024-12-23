@@ -64,7 +64,7 @@ void dict_rehash_bucket(const bucket_t *bucket, bucket_t **new_buckets,
 }
 
 /**
- * @link https://github.com/python/cpython/blob/main/Python/hashtable.c#L108
+ * @see https://github.com/python/cpython/blob/main/Python/hashtable.c#L108
  */
 static
 uint64_t round_size(uint64_t new_size)

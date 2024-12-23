@@ -19,7 +19,7 @@ var searchData=
   ['dict_5fdtor_2ec_16',['dict_dtor.c',['../dict__dtor_8c.html',1,'']]],
   ['dict_5ffree_5fkeys_17',['dict_free_keys',['../dict_8h.html#adef26a5494c9bdd0e75276c4ea717d79',1,'dict_free_keys(dict_keys_t *dict_keys):&#160;dict_free_keys.c'],['../dict__free__keys_8c.html#adef26a5494c9bdd0e75276c4ea717d79',1,'dict_free_keys(dict_keys_t *dict_keys):&#160;dict_free_keys.c']]],
   ['dict_5ffree_5fkeys_2ec_18',['dict_free_keys.c',['../dict__free__keys_8c.html',1,'']]],
-  ['dict_5ffree_5fvalues_19',['dict_free_values',['../dict_8h.html#afb28f41a0826eea61df21fd8b6e24fb7',1,'dict_free_values(dict_values_t *dict_keys):&#160;dict_free_values.c'],['../dict__free__values_8c.html#a66becdbd651b0382712e8d7ed0cd22ce',1,'dict_free_values(dict_values_t *dict_values):&#160;dict_free_values.c']]],
+  ['dict_5ffree_5fvalues_19',['dict_free_values',['../dict_8h.html#a66becdbd651b0382712e8d7ed0cd22ce',1,'dict_free_values(dict_values_t *dict_values):&#160;dict_free_values.c'],['../dict__free__values_8c.html#a66becdbd651b0382712e8d7ed0cd22ce',1,'dict_free_values(dict_values_t *dict_values):&#160;dict_free_values.c']]],
   ['dict_5ffree_5fvalues_2ec_20',['dict_free_values.c',['../dict__free__values_8c.html',1,'']]],
   ['dict_5fget_5fkeys_21',['dict_get_keys',['../dict_8h.html#a7d2857cb35bbf508db10954af07a9768',1,'dict_get_keys(const dict_t *dict):&#160;dict_get_keys.c'],['../dict__get__keys_8c.html#a7d2857cb35bbf508db10954af07a9768',1,'dict_get_keys(const dict_t *dict):&#160;dict_get_keys.c']]],
   ['dict_5fget_5fkeys_2ec_22',['dict_get_keys.c',['../dict__get__keys_8c.html',1,'']]],

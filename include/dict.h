@@ -70,20 +70,8 @@
 /**
  * @brief Such function prototype represents the function to use to release the
  * memory allcoated to an entry value. If the value was not allocated (e.g. the
- * value is an integer), then you may use a NULL pointer instead to indicate
+ * value is an integer), then you may use a `NULL` pointer instead to indicate
  * that the value has not to be free.
- *
- * @note There may be an upgrade in the future where either key or value may
- * be `NULL` pointers when calling. For instace, if the programmer tries to
- * insert different values with the same key, during the second insertion, the
- * value already in the dict will have to be deallocated, but not the key
- * itself. Now that I think about it, I wonder what would happen if one sets an
- * allocated key and then tries to insert the key with another allocated key
- * containing the same value, or worse, a stack-allocated key, which can't be
- * free then, as it would cause a bad free. The solution may be to return an
- * error when one tries to insert a key which already is set in the dict. They
- * will be in charge of removing it first, then inserting it with it's new
- * value.
  */
 typedef void (*free_pair_t)(char *key, void *value);
 
@@ -104,7 +92,6 @@ typedef struct s_bucket {
 
 /**
  * @internal
- * @file src/dict_buckets_ctor.c
  * @brief Allocates new buckets linked list inside the array.
  *
  * If it failed to allocate one bucket, it free all the previously allocated
@@ -115,7 +102,7 @@ typedef struct s_bucket {
  * though the purpose of this function is to allocate buckets of a new buckets
  * array that has just been allocated.
  *
- * If the buckets array is a `NULL` pointer, the function will crash.
+ * @warning If the buckets array is a `NULL` pointer, the function will crash.
  *
  * @param buckets The pre-allocated buckets array.
  * @param size The number of buckets to allocate inside the buckets array.
@@ -125,12 +112,11 @@ int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
 
 /**
  * @internal
- * @file src/dict_buckets_dtor.c
  * @brief Deallocates buckets linked list from the array.
  *
- * This function will not free the buckets array, just it's elements.
+ * @warning If the buckets array is a `NULL` pointer, the function will crash.
  *
- * If the buckets array is a `NULL` pointer, the function will crash.
+ * @note This function will not free the buckets array, just it's elements.
  *
  * @param buckets The pre-allocated buckets array.
  * @param size The nuber of buckets to deallocate from the buckets array.
@@ -141,14 +127,12 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size,
 
 /**
  * @internal
- * @file src/dict_bucket_has_key.c
  * @brief Returns whether a key is present in the bucket.
  *
- * If a `NULL` pointer is passed for bucket, the function will crash.
+ * @warning If a `NULL` pointer is passed for bucket, the function will crash.
  *
- * @note The key MUST NOT be `NULL` as it may return a falsy value. It's not
- * the function's purpose to check for a `NULL` pointer key, so you better make
- * sure it's not before calling it.
+ * @note If the key is `NULL` a falsy value may be returned. Make sure it's not
+ * before calling the function.
  *
  * @param bucket The bucket in which to look for the key.
  * @param key The key to look for in the bucket.
@@ -158,13 +142,12 @@ int dict_bucket_has_key(const bucket_t *bucket, const char *key);
 
 /**
  * @internal
- * @file src/dict_bucket_insert.c
  * @brief Inserts an entry into a dict bucket.
  *
- * If it failed to allocate the linked list bucket node, the bucket is left
- * unchanged and the function returns -1.
+ * @warning If a `NULL` pointer is passed for bucket, the function will crash.
  *
- * If a `NULL` pointer is passed for bucket, the function will crash.
+ * @note If it failed to allocate the linked list bucket node, the bucket is
+ * left unchanged and the function returns -1.
  *
  * @param bucket The pointer to the allocated bucket.
  * @param key The key of the pair.
@@ -175,14 +158,13 @@ int dict_bucket_insert(bucket_t **bucket, char *key, void *value);
 
 /**
  * @internal
- * @file src/dict_buckets_debug.c
  * @brief This function prints the content of each linked list bucket from the
  * buckets array.
  *
- * The debugging content will be flushed to the STDERR file descriptor (2).
+ * @warning If `NULL` pointer is passed, or if the size is greater than the
+ * actual size of the array, this function will crash.
  *
- * If `NULL` pointer is passed, or if the size is greater than the actual size
- * of the array, this function will crash.
+ * @note The debugging content will be flushed to the `stderr` file descriptor.
  *
  * @param buckets The buckets to debug.
  * @param size The number of bucket inside the buckets array.
@@ -217,25 +199,23 @@ typedef struct s_dict {
 } dict_t;
 
 /**
- * @file src/dict_ctor.c
  * @brief Allocates a new dict.
  *
- * If it failed, returns `NULL`.
+ * @note If it failed, returns a `NULL` pointer.
  *
  * @return The allocated dict.
  */
 dict_t *dict_ctor(void);
 
 /**
- * @file src/dict_dtor.c
  * @brief Deallocates the dict.
  *
  * The `free_pair` function will be in charge to free the key of the pair, if
  * not constant, and the value, if not constant. If both are constant, you can
  * pass a `NULL` pointer as nothing has to be free'd.
  *
- * If a `NULL` pointer is passed, or if the dict has already been deallocated,
- * the function will crash.
+ * @warning If a `NULL` pointer is passed, or if the dict has already been
+ * deallocated, the function will crash.
  *
  * @param dict The dict's pointer to deallocate.
  * @param free_pair The function to use to free pair, may be `NULL`.
@@ -243,19 +223,17 @@ dict_t *dict_ctor(void);
 void dict_dtor(dict_t *dict, free_pair_t free_pair);
 
 /**
- * @file src/dict_insert.c
  * @brief Insert an entry into the dict.
  *
  * The function allocates a new entry. If it was able to allocate AND insert
  * the entry, the function returns 0. If either one failed, it will return -1
  * and the dict is left unchanged.
  *
- * If a `NULL` pointer is passed, or if the dict has been deallocated, the
- * function will crash.
+ * @warning If a `NULL` pointer is passed, or if the dict has been deallocated,
+ * the function will crash.
  *
- * @note The key MUST NOT be `NULL` as it may break other functions. It's not
- * the function's purpose to check for a `NULL` pointer key, so you better make
- * sure it's not before calling it.
+ * @note If the key is `NULL` some functions may break. Make sure it's not
+ * before calling the function.
  *
  * @param dict The dict in which to insert the entry.
  * @param key The key to refer to the value.
@@ -267,7 +245,6 @@ int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
 
 /**
  * @internal
- * @file src/dict_resize.c
  * @brief Resizes the dict.
  *
  * This process implies that all the key hashes must be recomputed. Depending
@@ -286,10 +263,10 @@ int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
  *   per key, knowning CPU can compute pretty fast, and that the `strlen`
  *   function is probably optimized;
  *
- * If the dict could not be resized, it's unchanged and -1 is returned.
+ * @warning If a `NULL` pointer is passed, or if the dict has been deallocated,
+ * the function will crash.
  *
- * If a `NULL` pointer is passed, or if the dict has been deallocated, the
- * function will crash.
+ * @note If the dict could not be resized, it's unchanged and -1 is returned.
  *
  * @param dict The dict to resize.
  * @return 0 on success, -1 on error.
@@ -315,21 +292,20 @@ typedef struct s_dict_keys {
 } dict_keys_t;
 
 /**
- * @file src/dict_get_keys.c
  * @brief Returns the list of the keys of the dict.
  *
  * If an error occured during the dict_keys_t object allocation, `NULL` pointer
  * is returned.
  *
- * @attention DO NOT TRY TO FREE ANY KEY INSIDE THE `keys` MEMBER BY YOURSELF.
- * The `keys` array member contains references to the dict keys, not a copy. If
- * you free one of them, it may break the whole dict object.
- *
  * The `dict_keys_t` object will have to be free using the `dict_free_keys`
  * function.
  *
- * If a `NULL` pointer is passed, or if the dict has already been deallocated,
- * the function will crash.
+ * @warning If a `NULL` pointer is passed, or if the dict has already been
+ * deallocated, the function will crash.
+ *
+ * @warning DO NOT TRY TO FREE ANY ITEM INSIDE THE `keys` MEMBER BY YOURSELF.
+ * The `keys` array member contains references to the keys, not copies. If you
+ * free one of them, it may break the whole dict object.
  *
  * @note The list of keys is not ordered. The keys are taken from each bucket
  * from 0 to the size of the dict, and each of the bucket is iterated over from
@@ -342,7 +318,6 @@ typedef struct s_dict_keys {
 dict_keys_t *dict_get_keys(const dict_t *dict);
 
 /**
- * @file src/dict_free_keys.c
  * @brief Release memory from `dict_get_keys` allocations.
  *
  * If a `NULL` pointer is passed, or if the dict keys have already been
@@ -371,21 +346,20 @@ typedef struct s_dict_values {
 } dict_values_t;
 
 /**
- * @file src/dict_get_values.c
  * @brief Returns the list of the values of the dict.
  *
  * If an error occured during the dict_values_t object allocation, `NULL`
  * pointer is returned.
  *
- * @attention DO NOT TRY TO FREE ANY KEY INSIDE THE `values` MEMBER BY
- * YOURSELF. The `values` array member contains references to the dict values,
- * not a copy. If you free one of them, it may break the whole dict object.
- *
  * The `dict_values_t` object will have to be free using the `dict_free_values`
  * function.
  *
- * If a `NULL` pointer is passed, or if the dict has already been deallocated,
- * the function will crash.
+ * @warning If a `NULL` pointer is passed, or if the dict has already been
+ * deallocated, the function will crash.
+ *
+ * @warning DO NOT TRY TO FREE ANY ITEM INSIDE THE `values` MEMBER BY YOURSELF.
+ * The `values` array member contains references to the values, not copies. If
+ * you free one of them, it may break the whole dict object.
  *
  * @note The list of values is not ordered. The values are taken from each
  * bucket from 0 to the size of the dict, and each of the bucket is iterated
@@ -398,7 +372,6 @@ typedef struct s_dict_values {
 dict_values_t *dict_get_values(const dict_t *dict);
 
 /**
- * @file src/dict_free_values.c
  * @brief Release memory from `dict_get_values` allocations.
  *
  * If a `NULL` pointer is passed, or if the dict values have already been
@@ -406,7 +379,7 @@ dict_values_t *dict_get_values(const dict_t *dict);
  *
  * @param dict_values The values to free.
  */
-void dict_free_values(dict_values_t *dict_keys);
+void dict_free_values(dict_values_t *dict_values);
 
 
 #endif /* !__DICT_H_ */

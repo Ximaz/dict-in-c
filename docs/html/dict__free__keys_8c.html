@@ -101,9 +101,6 @@ $(function(){initNavTree('dict__free__keys_8c.html',''); initResizable(true); })
   <div class="headertitle"><div class="title">dict_free_keys.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Release memory from <code>dict_get_keys</code> allocations.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br />
 </div>
@@ -112,20 +109,10 @@ $(function(){initNavTree('dict__free__keys_8c.html',''); initResizable(true); })
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adef26a5494c9bdd0e75276c4ea717d79" id="r_adef26a5494c9bdd0e75276c4ea717d79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adef26a5494c9bdd0e75276c4ea717d79">dict_free_keys</a> (<a class="el" href="dict_8h.html#a37acf3a986b4069a5498454665a83be7">dict_keys_t</a> *dict_keys)</td></tr>
+<tr class="memdesc:adef26a5494c9bdd0e75276c4ea717d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release memory from <code>dict_get_keys</code> allocations.  <br /></td></tr>
 <tr class="separator:adef26a5494c9bdd0e75276c4ea717d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Release memory from <code>dict_get_keys</code> allocations. </p>
-<p>If a <code>NULL</code> pointer is passed, or if the dict keys have already been deallocated, the function will crash.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dict_keys</td><td>The keys to free. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition in file <a class="el" href="dict__free__keys_8c_source.html">dict_free_keys.c</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="adef26a5494c9bdd0e75276c4ea717d79" name="adef26a5494c9bdd0e75276c4ea717d79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adef26a5494c9bdd0e75276c4ea717d79">&#9670;&#160;</a></span>dict_free_keys()</h2>
 
@@ -141,14 +128,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Release memory from <code>dict_get_keys</code> allocations. </p>
+<p>If a <code>NULL</code> pointer is passed, or if the dict keys have already been deallocated, the function will crash.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dict_keys</td><td>The keys to free. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="dict__free__keys_8c_source.html#l00011">11</a> of file <a class="el" href="dict__free__keys_8c_source.html">dict_free_keys.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>{</div>
 <div class="line"><span class="lineno">   13</span>    free(dict_keys-&gt;<a class="code hl_variable" href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a>);</div>
 <div class="line"><span class="lineno">   14</span>    free(dict_keys);</div>
 <div class="line"><span class="lineno">   15</span>}</div>
-<div class="ttc" id="astructs__dict__keys_html_a06f0b2ba80c00fe0335494f6df9a0df2"><div class="ttname"><a href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">s_dict_keys::keys</a></div><div class="ttdeci">const char ** keys</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00314">dict.h:314</a></div></div>
+<div class="ttc" id="astructs__dict__keys_html_a06f0b2ba80c00fe0335494f6df9a0df2"><div class="ttname"><a href="structs__dict__keys.html#a06f0b2ba80c00fe0335494f6df9a0df2">s_dict_keys::keys</a></div><div class="ttdeci">const char ** keys</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00291">dict.h:291</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00314">s_dict_keys::keys</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00291">s_dict_keys::keys</a>.</p>
 
 </div>
 </div>

@@ -101,9 +101,6 @@ $(function(){initNavTree('dict__ctor_8c.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">dict_ctor.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Allocates a new dict.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br />
 </div>
@@ -112,15 +109,10 @@ $(function(){initNavTree('dict__ctor_8c.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aabe6f8d8d416984156a7187650b66d43" id="r_aabe6f8d8d416984156a7187650b66d43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b">dict_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabe6f8d8d416984156a7187650b66d43">dict_ctor</a> (void)</td></tr>
+<tr class="memdesc:aabe6f8d8d416984156a7187650b66d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a new dict.  <br /></td></tr>
 <tr class="separator:aabe6f8d8d416984156a7187650b66d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Allocates a new dict. </p>
-<p>If it failed, returns <code>NULL</code>.</p>
-<dl class="section return"><dt>Returns</dt><dd>The allocated dict. </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="dict__ctor_8c_source.html">dict_ctor.c</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="aabe6f8d8d416984156a7187650b66d43" name="aabe6f8d8d416984156a7187650b66d43"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabe6f8d8d416984156a7187650b66d43">&#9670;&#160;</a></span>dict_ctor()</h2>
 
@@ -135,6 +127,10 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Allocates a new dict. </p>
+<dl class="section note"><dt>Note</dt><dd>If it failed, returns a <code>NULL</code> pointer.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The allocated dict. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="dict__ctor_8c_source.html#l00011">11</a> of file <a class="el" href="dict__ctor_8c_source.html">dict_ctor.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   12</span>{</div>
@@ -152,15 +148,15 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   24</span>    dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a> = <a class="code hl_define" href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a>;</div>
 <div class="line"><span class="lineno">   25</span>    <span class="keywordflow">return</span> dict;</div>
 <div class="line"><span class="lineno">   26</span>}</div>
-<div class="ttc" id="adict_8h_html_a524dc6d79f8e1df8fa88198549ccaacb"><div class="ttname"><a href="dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a></div><div class="ttdeci">int dict_buckets_ctor(bucket_t **buckets, uint64_t size)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor.c:11</a></div></div>
-<div class="ttc" id="adict_8h_html_a7c424d212d0a2f17f239794857e88e07"><div class="ttname"><a href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a></div><div class="ttdeci">#define DICT_MIN_SIZE</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00017">dict.h:17</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
-<div class="ttc" id="astructs__dict_html"><div class="ttname"><a href="structs__dict.html">s_dict</a></div><div class="ttdoc">This structure represents the state of a dict (hashmap) object. Upon insertion, the string keys are h...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00208">dict.h:208</a></div></div>
-<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00213">dict.h:213</a></div></div>
-<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00216">dict.h:216</a></div></div>
-<div class="ttc" id="astructs__dict_html_a70b91e54a49a08e0d06539a06c665f89"><div class="ttname"><a href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">s_dict::items</a></div><div class="ttdeci">uint64_t items</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00210">dict.h:210</a></div></div>
+<div class="ttc" id="adict_8h_html_a524dc6d79f8e1df8fa88198549ccaacb"><div class="ttname"><a href="dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a></div><div class="ttdeci">int dict_buckets_ctor(bucket_t **buckets, uint64_t size)</div><div class="ttdoc">Allocates new buckets linked list inside the array.</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor.c:11</a></div></div>
+<div class="ttc" id="adict_8h_html_a7c424d212d0a2f17f239794857e88e07"><div class="ttname"><a href="dict_8h.html#a7c424d212d0a2f17f239794857e88e07">DICT_MIN_SIZE</a></div><div class="ttdeci">#define DICT_MIN_SIZE</div><div class="ttdoc">The default number of buckets to be allocated.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00017">dict.h:17</a></div></div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00082">dict.h:82</a></div></div>
+<div class="ttc" id="astructs__dict_html"><div class="ttname"><a href="structs__dict.html">s_dict</a></div><div class="ttdoc">This structure represents the state of a dict (hashmap) object. Upon insertion, the string keys are h...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00190">dict.h:190</a></div></div>
+<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00195">dict.h:195</a></div></div>
+<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00198">dict.h:198</a></div></div>
+<div class="ttc" id="astructs__dict_html_a70b91e54a49a08e0d06539a06c665f89"><div class="ttname"><a href="structs__dict.html#a70b91e54a49a08e0d06539a06c665f89">s_dict::items</a></div><div class="ttdeci">uint64_t items</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00192">dict.h:192</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="dict_8h_source.html#l00216">s_dict::buckets</a>, <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor()</a>, <a class="el" href="dict_8h_source.html#l00017">DICT_MIN_SIZE</a>, <a class="el" href="dict_8h_source.html#l00210">s_dict::items</a>, and <a class="el" href="dict_8h_source.html#l00213">s_dict::size</a>.</p>
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00198">s_dict::buckets</a>, <a class="el" href="dict__buckets__ctor_8c_source.html#l00011">dict_buckets_ctor()</a>, <a class="el" href="dict_8h_source.html#l00017">DICT_MIN_SIZE</a>, <a class="el" href="dict_8h_source.html#l00192">s_dict::items</a>, and <a class="el" href="dict_8h_source.html#l00195">s_dict::size</a>.</p>
 
 </div>
 </div>

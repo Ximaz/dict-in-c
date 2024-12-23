@@ -25,7 +25,7 @@ var dict_8h =
     [ "dict_ctor", "dict_8h.html#aabe6f8d8d416984156a7187650b66d43", null ],
     [ "dict_dtor", "dict_8h.html#ab31bdadc44fa3d4dc062d85bbe274975", null ],
     [ "dict_free_keys", "dict_8h.html#adef26a5494c9bdd0e75276c4ea717d79", null ],
-    [ "dict_free_values", "dict_8h.html#afb28f41a0826eea61df21fd8b6e24fb7", null ],
+    [ "dict_free_values", "dict_8h.html#a66becdbd651b0382712e8d7ed0cd22ce", null ],
     [ "dict_get_keys", "dict_8h.html#a7d2857cb35bbf508db10954af07a9768", null ],
     [ "dict_get_values", "dict_8h.html#a335932b9203c802312366d3c1444cf3f", null ],
     [ "dict_insert", "dict_8h.html#a5afb5c3b7dca4ad31adfc6fd3003c405", null ],

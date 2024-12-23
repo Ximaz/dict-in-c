@@ -110,14 +110,14 @@ $(function(){initNavTree('dict__buckets__ctor_8c_source.html',''); initResizable
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="dict_8h.html">dict.h</a>&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb">   11</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__buckets__ctor_8c.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a>(<a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **buckets, uint64_t size)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="dict__buckets__ctor_8c.html#a524dc6d79f8e1df8fa88198549ccaacb">   11</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__buckets__ctor_8c.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a>(bucket_t **buckets, uint64_t size)</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    uint64_t index = 0;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">for</span> (; index &lt; size; ++index) {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        buckets[index] = (<a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *) calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structs__bucket.html">bucket_t</a>));</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        buckets[index] = (bucket_t *) calloc(1, <span class="keyword">sizeof</span>(bucket_t));</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">if</span> (NULL == buckets[index]) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <a class="code hl_function" href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(buckets, index, NULL);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <a class="code hl_function" href="dict__buckets__dtor_8c.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(buckets, index, NULL);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        }</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
@@ -125,9 +125,8 @@ $(function(){initNavTree('dict__buckets__ctor_8c_source.html',''); initResizable
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
 </div>
 <div class="ttc" id="adict_8h_html"><div class="ttname"><a href="dict_8h.html">dict.h</a></div></div>
-<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdoc">Deallocates buckets linked list from the array.</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00041">dict_buckets_dtor.c:41</a></div></div>
-<div class="ttc" id="adict__buckets__ctor_8c_html_a524dc6d79f8e1df8fa88198549ccaacb"><div class="ttname"><a href="dict__buckets__ctor_8c.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a></div><div class="ttdeci">int dict_buckets_ctor(bucket_t **buckets, uint64_t size)</div><div class="ttdoc">Allocates new buckets linked list inside the array.</div><div class="ttdef"><b>Definition</b> <a href="#l00011">dict_buckets_ctor.c:11</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00100">dict.h:100</a></div></div>
+<div class="ttc" id="adict__buckets__ctor_8c_html_a524dc6d79f8e1df8fa88198549ccaacb"><div class="ttname"><a href="dict__buckets__ctor_8c.html#a524dc6d79f8e1df8fa88198549ccaacb">dict_buckets_ctor</a></div><div class="ttdeci">int dict_buckets_ctor(bucket_t **buckets, uint64_t size)</div><div class="ttdef"><b>Definition</b> <a href="#l00011">dict_buckets_ctor.c:11</a></div></div>
+<div class="ttc" id="adict__buckets__dtor_8c_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict__buckets__dtor_8c.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00041">dict_buckets_dtor.c:41</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

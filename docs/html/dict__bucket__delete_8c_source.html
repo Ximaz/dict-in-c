@@ -106,56 +106,46 @@ $(function(){initNavTree('dict__bucket__delete_8c_source.html',''); initResizabl
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">** Exposes a function to delete an entry from a dict bucket.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="dict_8h.html">dict.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">inline</span> <span class="keyword">static</span></div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="dict__bucket__delete_8c.html#a1dced7434f9442741818e9f72b82977e">   27</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__bucket__delete_8c.html#a1dced7434f9442741818e9f72b82977e">dict_bucket_delete_until</a>(<a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *node, <span class="keywordtype">char</span> *key, <a class="code hl_typedef" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *prev = NULL;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">while</span> (NULL != node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">if</span> (!<a class="code hl_define" href="dict_8h.html#a48e0e4d61259c9429a5a5806c737d1db">DICT_KEY_MATCH</a>(node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, key)) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            prev = node;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            node = node-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        dprintf(2, <span class="stringliteral">&quot;Prev K : %s | Node K : %s | Next K : %s\n&quot;</span>, prev-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, node-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        prev-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a> = node-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">if</span> (NULL != free_pair)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            free_pair(node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, node-&gt;<a class="code hl_variable" href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">value</a>);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        free(node);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
-</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="dict_8h.html#a8bc7d4b7860ccc213d88bdb7f7a43335">   47</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__bucket__delete_8c.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a>(<a class="code hl_struct" href="structs__bucket.html">bucket_t</a> **bucket, <span class="keywordtype">char</span> *key, <a class="code hl_typedef" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *node = *bucket;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (!<a class="code hl_define" href="dict_8h.html#a48e0e4d61259c9429a5a5806c737d1db">DICT_KEY_MATCH</a>(node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, key))</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="dict__bucket__delete_8c.html#a1dced7434f9442741818e9f72b82977e">dict_bucket_delete_until</a>(node, key, free_pair);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    *bucket = node-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (NULL != free_pair)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        free_pair(node-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, node-&gt;<a class="code hl_variable" href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">value</a>);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    free(node);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="dict_8h.html">dict.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">inline</span> <span class="keyword">static</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">int</span> dict_bucket_delete_until(bucket_t *node, <span class="keywordtype">char</span> *key, <a class="code hl_typedef" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    bucket_t *prev = NULL;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">while</span> (NULL != node-&gt;key) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">if</span> (!DICT_KEY_MATCH(node-&gt;key, key)) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            prev = node;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            node = node-&gt;next;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        prev-&gt;next = node-&gt;next;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (NULL != free_pair)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            free_pair(node-&gt;key, node-&gt;value);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        free(node);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="dict__bucket__delete_8c.html#a8bc7d4b7860ccc213d88bdb7f7a43335">   45</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__bucket__delete_8c.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a>(bucket_t **bucket, <span class="keywordtype">char</span> *key, <a class="code hl_typedef" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    bucket_t *node = *bucket;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (!DICT_KEY_MATCH(node-&gt;key, key))</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span> dict_bucket_delete_until(node, key, free_pair);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    *bucket = node-&gt;next;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (NULL != free_pair)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        free_pair(node-&gt;key, node-&gt;value);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    free(node);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
 </div>
 <div class="ttc" id="adict_8h_html"><div class="ttname"><a href="dict_8h.html">dict.h</a></div></div>
-<div class="ttc" id="adict_8h_html_a48e0e4d61259c9429a5a5806c737d1db"><div class="ttname"><a href="dict_8h.html#a48e0e4d61259c9429a5a5806c737d1db">DICT_KEY_MATCH</a></div><div class="ttdeci">#define DICT_KEY_MATCH(K1, K2)</div><div class="ttdoc">Returns whether two keys from a dict are matching.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00078">dict.h:78</a></div></div>
-<div class="ttc" id="adict_8h_html_ae940ecffdd2efc620fbe8ff1d91a2927"><div class="ttname"><a href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></div><div class="ttdeci">void(* free_pair_t)(char *key, void *value)</div><div class="ttdoc">Such function prototype represents the function to use to release the memory allcoated to an entry va...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
-<div class="ttc" id="adict__bucket__delete_8c_html_a1dced7434f9442741818e9f72b82977e"><div class="ttname"><a href="dict__bucket__delete_8c.html#a1dced7434f9442741818e9f72b82977e">dict_bucket_delete_until</a></div><div class="ttdeci">static int dict_bucket_delete_until(bucket_t *node, char *key, free_pair_t free_pair)</div><div class="ttdoc">Deletes the node of a bucket once it has been identified by the key.</div><div class="ttdef"><b>Definition</b> <a href="#l00027">dict_bucket_delete.c:27</a></div></div>
-<div class="ttc" id="adict__bucket__delete_8c_html_a8bc7d4b7860ccc213d88bdb7f7a43335"><div class="ttname"><a href="dict__bucket__delete_8c.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a></div><div class="ttdeci">int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair)</div><div class="ttdoc">Deletes an entry from the bucket based on the key.</div><div class="ttdef"><b>Definition</b> <a href="#l00047">dict_bucket_delete.c:47</a></div></div>
-<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00100">dict.h:100</a></div></div>
-<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00102">dict.h:102</a></div></div>
-<div class="ttc" id="astructs__bucket_html_a21984e3cea02225302d8c517cf11fa4f"><div class="ttname"><a href="structs__bucket.html#a21984e3cea02225302d8c517cf11fa4f">s_bucket::value</a></div><div class="ttdeci">void * value</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00105">dict.h:105</a></div></div>
-<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00108">dict.h:108</a></div></div>
+<div class="ttc" id="adict_8h_html_ae940ecffdd2efc620fbe8ff1d91a2927"><div class="ttname"><a href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></div><div class="ttdeci">void(* free_pair_t)(char *key, void *value)</div><div class="ttdoc">Such function prototype represents the function to use to release the memory allcoated to an entry va...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00089">dict.h:89</a></div></div>
+<div class="ttc" id="adict__bucket__delete_8c_html_a8bc7d4b7860ccc213d88bdb7f7a43335"><div class="ttname"><a href="dict__bucket__delete_8c.html#a8bc7d4b7860ccc213d88bdb7f7a43335">dict_bucket_delete</a></div><div class="ttdeci">int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="#l00045">dict_bucket_delete.c:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

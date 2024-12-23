@@ -11,32 +11,29 @@
 #include <stdint.h>
 #include <string.h>
 
+/** @cond INTERNAL */
+
 /**
- * @internal
  * @brief The default number of buckets to be allocated.
  */
 #define DICT_MIN_SIZE (2 << 3)
 
 /**
- * @internal
  * @brief The factor limit to be reach before allocating new buckets.
  */
 #define DICT_HIGH 0.5
 
 /**
- * @internal
  * @brief The factor limit to be reach before deallocating buckets.
  */
 #define DICT_LOW 0.1
 
 /**
- * @internal
  * @brief Once multiplied by the number of entries, returns the new dict size.
  */
 #define DICT_RESIZE_FACTOR 2.0 / (DICT_HIGH + DICT_LOW)
 
 /**
- * @internal
  * @brief Returns whether the dict must grow to accept new entries.
  *
  * @param D The dict to evaluate.
@@ -44,7 +41,6 @@
 #define DICT_MUST_GROW(D) ((float) (D)->items / (float) (D)->size) > DICT_HIGH
 
 /**
- * @internal
  * @brief Returns whether the dict must shirnk to save some memory upon entry
  * removal.
  *
@@ -53,14 +49,12 @@
 #define DICT_MUST_SHRINK(D) ((float) (D)->items / (float) (D)->size) < DICT_LOW
 
 /**
- * @internal
  * @brief The hash seed to use. Mostly for security, but it has to be the same
  * all across the project.
  */
 #define HASH_SEED 0
 
 /**
- * @internal
  * @brief Returns the index to the bucket in which to store the entry.
  *
  * @param H The key hash.
@@ -69,13 +63,14 @@
 #define DICT_BUCKET_IDX(H, S) (H) % (S)
 
 /**
- * @internal
  * @brief Returns whether two keys from a dict are matching.
  *
  * @param K1 The first key to compare.
  * @param K2 The second key to compare.
  */
 #define DICT_KEY_MATCH(K1, K2) (0 == strcmp((K1), (K2)))
+
+/** @endcond INTERNAL */
 
 /**
  * @brief Returns the number of items inside the dict. Not to be mixed up with
@@ -93,6 +88,8 @@
  */
 typedef void (*free_pair_t)(char *key, void *value);
 
+/** @cond INTERNAL */
+
 /**
  * @brief The bucket type is a linked list node which contains both the key and
  * the value to store.
@@ -109,7 +106,6 @@ typedef struct s_bucket {
 } bucket_t;
 
 /**
- * @internal
  * @brief Allocates new buckets linked list inside the array.
  *
  * If it failed to allocate one bucket, it free all the previously allocated
@@ -129,7 +125,6 @@ typedef struct s_bucket {
 int dict_buckets_ctor(bucket_t **buckets, uint64_t size);
 
 /**
- * @internal
  * @brief Deallocates buckets linked list from the array.
  *
  * @warning If the buckets array is a `NULL` pointer, the function will crash.
@@ -144,7 +139,6 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size,
     free_pair_t free_pair);
 
 /**
- * @internal
  * @brief Returns whether a key is present in the bucket.
  *
  * @warning If a `NULL` pointer is passed for bucket, the function will crash.
@@ -159,7 +153,6 @@ void dict_buckets_dtor(bucket_t **buckets, uint64_t size,
 int dict_bucket_has_key(const bucket_t *bucket, const char *key);
 
 /**
- * @internal
  * @brief Inserts an entry into a dict bucket.
  *
  * @warning If a `NULL` pointer is passed for bucket, the function will crash.
@@ -197,7 +190,6 @@ int dict_bucket_insert(bucket_t **bucket, char *key, void *value);
 int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair);
 
 /**
- * @internal
  * @brief This function prints the content of each linked list bucket from the
  * buckets array.
  *
@@ -210,6 +202,8 @@ int dict_bucket_delete(bucket_t **bucket, char *key, free_pair_t free_pair);
  * @param size The number of bucket inside the buckets array.
  */
 void dict_buckets_debug(bucket_t *const *buckets, uint64_t size);
+
+/** @endcond INTERNAL */
 
 /**
  * @brief This structure represents the state of a dict (hashmap) object. Upon
@@ -308,8 +302,9 @@ int dict_insert(dict_t *dict, char *key, uint64_t key_length, void *value);
 int dict_delete(dict_t *dict, char *key, uint64_t key_length,
     free_pair_t free_pair);
 
+/** @cond INTERNAL */
+
 /**
- * @internal
  * @brief Resizes the dict.
  *
  * This process implies that all the key hashes must be recomputed. Depending
@@ -337,6 +332,8 @@ int dict_delete(dict_t *dict, char *key, uint64_t key_length,
  * @return 0 on success, -1 on error.
  */
 int dict_resize(dict_t *dict);
+
+/** @endcond */
 
 /**
  * @brief This structure represents the keys of the dict. It will be computed
@@ -445,6 +442,5 @@ dict_values_t *dict_get_values(const dict_t *dict);
  * @param dict_values The values to free.
  */
 void dict_free_values(dict_values_t *dict_values);
-
 
 #endif /* !__DICT_H_ */

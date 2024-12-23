@@ -43,6 +43,7 @@ var searchData=
   ['dict_5fresize_40',['dict_resize',['../dict_8h.html#ac1041229270e0b557cd6eb6f7b4efb3a',1,'dict_resize(dict_t *dict):&#160;dict_resize.c'],['../dict__resize_8c.html#ac1041229270e0b557cd6eb6f7b4efb3a',1,'dict_resize(dict_t *dict):&#160;dict_resize.c']]],
   ['dict_5fresize_2ec_41',['dict_resize.c',['../dict__resize_8c.html',1,'']]],
   ['dict_5fresize_5ffactor_42',['DICT_RESIZE_FACTOR',['../dict_8h.html#aa87ee90c1daf77654454f884e16fde66',1,'dict.h']]],
-  ['dict_5ft_43',['dict_t',['../dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b',1,'dict.h']]],
-  ['dict_5fvalues_5ft_44',['dict_values_t',['../dict_8h.html#aff87357254fc41160f05530cf9e49942',1,'dict.h']]]
+  ['dict_5fsize_43',['DICT_SIZE',['../dict_8h.html#a67cf68b14bec2fd951761871b6ba5155',1,'dict.h']]],
+  ['dict_5ft_44',['dict_t',['../dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b',1,'dict.h']]],
+  ['dict_5fvalues_5ft_45',['dict_values_t',['../dict_8h.html#aff87357254fc41160f05530cf9e49942',1,'dict.h']]]
 ];

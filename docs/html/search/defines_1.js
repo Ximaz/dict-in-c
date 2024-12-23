@@ -7,5 +7,6 @@ var searchData=
   ['dict_5fmin_5fsize_4',['DICT_MIN_SIZE',['../dict_8h.html#a7c424d212d0a2f17f239794857e88e07',1,'dict.h']]],
   ['dict_5fmust_5fgrow_5',['DICT_MUST_GROW',['../dict_8h.html#a93bb42c03acbeb39278700e9f668dbdb',1,'dict.h']]],
   ['dict_5fmust_5fshrink_6',['DICT_MUST_SHRINK',['../dict_8h.html#a593599c585d7adacb119627085a4e25f',1,'dict.h']]],
-  ['dict_5fresize_5ffactor_7',['DICT_RESIZE_FACTOR',['../dict_8h.html#aa87ee90c1daf77654454f884e16fde66',1,'dict.h']]]
+  ['dict_5fresize_5ffactor_7',['DICT_RESIZE_FACTOR',['../dict_8h.html#aa87ee90c1daf77654454f884e16fde66',1,'dict.h']]],
+  ['dict_5fsize_8',['DICT_SIZE',['../dict_8h.html#a67cf68b14bec2fd951761871b6ba5155',1,'dict.h']]]
 ];

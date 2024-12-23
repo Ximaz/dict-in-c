@@ -12,6 +12,7 @@ var dict_8h =
     [ "DICT_MUST_GROW", "dict_8h.html#a93bb42c03acbeb39278700e9f668dbdb", null ],
     [ "DICT_MUST_SHRINK", "dict_8h.html#a593599c585d7adacb119627085a4e25f", null ],
     [ "DICT_RESIZE_FACTOR", "dict_8h.html#aa87ee90c1daf77654454f884e16fde66", null ],
+    [ "DICT_SIZE", "dict_8h.html#a67cf68b14bec2fd951761871b6ba5155", null ],
     [ "HASH_SEED", "dict_8h.html#ac2ece6a50bbf9fc78c0bb2f44a7761c4", null ],
     [ "bucket_t", "dict_8h.html#a85d9af0f9d956615cd6d9919074bb939", null ],
     [ "dict_keys_t", "dict_8h.html#a37acf3a986b4069a5498454665a83be7", null ],

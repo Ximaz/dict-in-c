@@ -78,6 +78,14 @@
 #define DICT_KEY_MATCH(K1, K2) (0 == strcmp((K1), (K2)))
 
 /**
+ * @brief Returns the number of items inside the dict. Not to be mixed up with
+ * the dict size which represents the numebr of allocated buckets.
+ *
+ * @param D The dict to get the number of items of.
+ */
+#define DICT_SIZE(D) (D)->items
+
+/**
  * @brief Such function prototype represents the function to use to release the
  * memory allcoated to an entry value. If the value was not allocated (e.g. the
  * value is an integer), then you may use a `NULL` pointer instead to indicate

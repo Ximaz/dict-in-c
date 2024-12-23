@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Dict in C: src/dict_dtor.c Source File</title>
+<title>Dict in C: src/dict_bucket_has_key.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('dict__dtor_8c_source.html',''); initResizable(true); });
+$(function(){initNavTree('dict__bucket__has__key_8c_source.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -96,40 +96,41 @@ $(function(){initNavTree('dict__dtor_8c_source.html',''); initResizable(true); }
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">dict_dtor.c</div></div>
+  <div class="headertitle"><div class="title">dict_bucket_has_key.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="dict__dtor_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<a href="dict__bucket__has__key_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">** XIMAZ PROJECTS, 2024</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">** dict_ctor.c</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">** dict_bucket_has_key.c</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">** File description:</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">** Exposes the dict object destructor.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">** Exposes a function ussed to tell whether a key is present in a bucket.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="dict_8h.html">dict.h</a>&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="dict_8h.html#ab31bdadc44fa3d4dc062d85bbe274975">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="dict__dtor_8c.html#ab31bdadc44fa3d4dc062d85bbe274975">dict_dtor</a>(<a class="code hl_struct" href="structs__dict.html">dict_t</a> *dict, <a class="code hl_typedef" href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a> free_pair)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="dict_8h.html#ab8dfdef434b70705a9802cf6a8fc7c09">   11</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="dict__bucket__has__key_8c.html#ab8dfdef434b70705a9802cf6a8fc7c09">dict_bucket_has_key</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structs__bucket.html">bucket_t</a> *bucket, <span class="keyword">const</span> <span class="keywordtype">char</span> *key)</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_function" href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a>(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>, dict-&gt;<a class="code hl_variable" href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">size</a>, free_pair);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    free(dict-&gt;<a class="code hl_variable" href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">buckets</a>);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    free(dict);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">while</span> (NULL != bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>) {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">if</span> (bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a> == key || 0 == strcmp(bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">key</a>, key))</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        bucket = bucket-&gt;<a class="code hl_variable" href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">next</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    }</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
 </div>
 <div class="ttc" id="adict_8h_html"><div class="ttname"><a href="dict_8h.html">dict.h</a></div></div>
-<div class="ttc" id="adict_8h_html_ac20f129d95f8bf5e1ec41b351d4e7046"><div class="ttname"><a href="dict_8h.html#ac20f129d95f8bf5e1ec41b351d4e7046">dict_buckets_dtor</a></div><div class="ttdeci">void dict_buckets_dtor(bucket_t **buckets, uint64_t size, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="dict__buckets__dtor_8c_source.html#l00031">dict_buckets_dtor.c:31</a></div></div>
-<div class="ttc" id="adict_8h_html_ae940ecffdd2efc620fbe8ff1d91a2927"><div class="ttname"><a href="dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927">free_pair_t</a></div><div class="ttdeci">void(* free_pair_t)(char *key, void *value)</div><div class="ttdoc">Such function prototype represents the function to use to release the memory allcoated to an entry va...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00088">dict.h:88</a></div></div>
-<div class="ttc" id="adict__dtor_8c_html_ab31bdadc44fa3d4dc062d85bbe274975"><div class="ttname"><a href="dict__dtor_8c.html#ab31bdadc44fa3d4dc062d85bbe274975">dict_dtor</a></div><div class="ttdeci">void dict_dtor(dict_t *dict, free_pair_t free_pair)</div><div class="ttdef"><b>Definition</b> <a href="#l00011">dict_dtor.c:11</a></div></div>
-<div class="ttc" id="astructs__dict_html"><div class="ttname"><a href="structs__dict.html">s_dict</a></div><div class="ttdoc">This structure represents the state of a dict (hashmap) object. Upon insertion, the string keys are h...</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00208">dict.h:208</a></div></div>
-<div class="ttc" id="astructs__dict_html_a1fd66c225d3cf2cbe5d49b88e4d2c742"><div class="ttname"><a href="structs__dict.html#a1fd66c225d3cf2cbe5d49b88e4d2c742">s_dict::size</a></div><div class="ttdeci">uint64_t size</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00213">dict.h:213</a></div></div>
-<div class="ttc" id="astructs__dict_html_a2ddc8b7275ad4df13116ac7e5dfc459e"><div class="ttname"><a href="structs__dict.html#a2ddc8b7275ad4df13116ac7e5dfc459e">s_dict::buckets</a></div><div class="ttdeci">bucket_t ** buckets</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00216">dict.h:216</a></div></div>
+<div class="ttc" id="adict__bucket__has__key_8c_html_ab8dfdef434b70705a9802cf6a8fc7c09"><div class="ttname"><a href="dict__bucket__has__key_8c.html#ab8dfdef434b70705a9802cf6a8fc7c09">dict_bucket_has_key</a></div><div class="ttdeci">int dict_bucket_has_key(const bucket_t *bucket, const char *key)</div><div class="ttdef"><b>Definition</b> <a href="#l00011">dict_bucket_has_key.c:11</a></div></div>
+<div class="ttc" id="astructs__bucket_html"><div class="ttname"><a href="structs__bucket.html">s_bucket</a></div><div class="ttdoc">The bucket type is a linked list node which contains both the key and the value to store.</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00094">dict.h:94</a></div></div>
+<div class="ttc" id="astructs__bucket_html_a07235b6d4be9d326a8b24ac7f3d8fd3e"><div class="ttname"><a href="structs__bucket.html#a07235b6d4be9d326a8b24ac7f3d8fd3e">s_bucket::key</a></div><div class="ttdeci">char * key</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00096">dict.h:96</a></div></div>
+<div class="ttc" id="astructs__bucket_html_accef4e30d0ddd4ce431b88bacb0f00da"><div class="ttname"><a href="structs__bucket.html#accef4e30d0ddd4ce431b88bacb0f00da">s_bucket::next</a></div><div class="ttdeci">struct s_bucket * next</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00102">dict.h:102</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dict__dtor_8c.html">dict_dtor.c</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dict__bucket__has__key_8c.html">dict_bucket_has_key.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

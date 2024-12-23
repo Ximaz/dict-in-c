@@ -17,6 +17,7 @@ var dict_8h =
     [ "dict_t", "dict_8h.html#ac5c57453f0b61d5eeb90f43be8b8323b", null ],
     [ "dict_values_t", "dict_8h.html#aff87357254fc41160f05530cf9e49942", null ],
     [ "free_pair_t", "dict_8h.html#ae940ecffdd2efc620fbe8ff1d91a2927", null ],
+    [ "dict_bucket_has_key", "dict_8h.html#ab8dfdef434b70705a9802cf6a8fc7c09", null ],
     [ "dict_bucket_insert", "dict_8h.html#a736cd20eaee3b5c4aefbc432731c11d6", null ],
     [ "dict_buckets_ctor", "dict_8h.html#a524dc6d79f8e1df8fa88198549ccaacb", null ],
     [ "dict_buckets_debug", "dict_8h.html#aa45227550c22a8eb6e3af274ed91488c", null ],

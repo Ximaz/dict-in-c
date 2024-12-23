@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Dict in C: s_dict_keys Struct Reference</title>
+<title>Dict in C: src/dict_free_values.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('structs__dict__keys.html',''); initResizable(true); });
+$(function(){initNavTree('dict__free__values_8c.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -97,77 +97,67 @@ $(function(){initNavTree('structs__dict__keys.html',''); initResizable(true); })
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structs__dict__keys-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">s_dict_keys Struct Reference</div></div>
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">dict_free_values.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This structure represents the keys of the dict. It will be computed each time the dict_keys() function is called. It will not be used by other function to operate on the dict, as the internal dict state is known by all functions.  
- <a href="#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="dict_8h_source.html">dict.h</a>&gt;</code></p>
+<p>Release memory from <code>dict_get_values</code> allocations.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br />
+</div>
+<p><a href="dict__free__values_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:abcd0fd3d85df6977a47ffa62cb22d3a6" id="r_abcd0fd3d85df6977a47ffa62cb22d3a6"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcd0fd3d85df6977a47ffa62cb22d3a6">size</a></td></tr>
-<tr class="separator:abcd0fd3d85df6977a47ffa62cb22d3a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06f0b2ba80c00fe0335494f6df9a0df2" id="r_a06f0b2ba80c00fe0335494f6df9a0df2"><td class="memItemLeft" align="right" valign="top">const char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06f0b2ba80c00fe0335494f6df9a0df2">keys</a></td></tr>
-<tr class="separator:a06f0b2ba80c00fe0335494f6df9a0df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a66becdbd651b0382712e8d7ed0cd22ce" id="r_a66becdbd651b0382712e8d7ed0cd22ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66becdbd651b0382712e8d7ed0cd22ce">dict_free_values</a> (<a class="el" href="dict_8h.html#aff87357254fc41160f05530cf9e49942">dict_values_t</a> *dict_values)</td></tr>
+<tr class="separator:a66becdbd651b0382712e8d7ed0cd22ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This structure represents the keys of the dict. It will be computed each time the dict_keys() function is called. It will not be used by other function to operate on the dict, as the internal dict state is known by all functions. </p>
+<div class="textblock"><p>Release memory from <code>dict_get_values</code> allocations. </p>
+<p>If a <code>NULL</code> pointer is passed, or if the dict values have already been deallocated, the function will crash.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dict_values</td><td>The values to free. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="dict_8h_source.html#l00305">305</a> of file <a class="el" href="dict_8h_source.html">dict.h</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a06f0b2ba80c00fe0335494f6df9a0df2" name="a06f0b2ba80c00fe0335494f6df9a0df2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06f0b2ba80c00fe0335494f6df9a0df2">&#9670;&#160;</a></span>keys</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char** s_dict_keys::keys</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The keys in a string array of length 'size'.</p>
-<dl class="section attention"><dt>Attention</dt><dd>DO NOT TRY TO FREE THE MEMORY OF ANY ITEM FROM THAT ARRAY. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="dict_8h_source.html#l00314">314</a> of file <a class="el" href="dict_8h_source.html">dict.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="dict__free__keys_8c_source.html#l00011">dict_free_keys()</a>, <a class="el" href="dict__get__keys_8c_source.html#l00028">dict_get_keys()</a>, and <a class="el" href="dict__get__keys_8c_source.html#l00013">populate_keys()</a>.</p>
-
-</div>
-</div>
-<a id="abcd0fd3d85df6977a47ffa62cb22d3a6" name="abcd0fd3d85df6977a47ffa62cb22d3a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcd0fd3d85df6977a47ffa62cb22d3a6">&#9670;&#160;</a></span>size</h2>
+<p class="definition">Definition in file <a class="el" href="dict__free__values_8c_source.html">dict_free_values.c</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a66becdbd651b0382712e8d7ed0cd22ce" name="a66becdbd651b0382712e8d7ed0cd22ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66becdbd651b0382712e8d7ed0cd22ce">&#9670;&#160;</a></span>dict_free_values()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t s_dict_keys::size</td>
+          <td class="memname">void dict_free_values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#aff87357254fc41160f05530cf9e49942">dict_values_t</a> *</td>          <td class="paramname"><span class="paramname"><em>dict_values</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Number of keys. Same value as the 'items' dict_t member. </p>
 
-<p class="definition">Definition at line <a class="el" href="dict_8h_source.html#l00307">307</a> of file <a class="el" href="dict_8h_source.html">dict.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="dict__get__keys_8c_source.html#l00013">populate_keys()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="dict__free__values_8c_source.html#l00012">12</a> of file <a class="el" href="dict__free__values_8c_source.html">dict_free_values.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>{</div>
+<div class="line"><span class="lineno">   14</span>    free(dict_values-&gt;<a class="code hl_variable" href="structs__dict__values.html#a698037e6478799f847a0fcd91ff0be43">values</a>);</div>
+<div class="line"><span class="lineno">   15</span>    free(dict_values);</div>
+<div class="line"><span class="lineno">   16</span>}</div>
+<div class="ttc" id="astructs__dict__values_html_a698037e6478799f847a0fcd91ff0be43"><div class="ttname"><a href="structs__dict__values.html#a698037e6478799f847a0fcd91ff0be43">s_dict_values::values</a></div><div class="ttdeci">const void ** values</div><div class="ttdef"><b>Definition</b> <a href="dict_8h_source.html#l00370">dict.h:370</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="dict_8h_source.html#l00370">s_dict_values::values</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/<a class="el" href="dict_8h_source.html">dict.h</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structs__dict__keys.html">s_dict_keys</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dict__free__values_8c.html">dict_free_values.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
